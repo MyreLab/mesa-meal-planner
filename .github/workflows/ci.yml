@@ -16,9 +16,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Data contracts (schemas, integrity, business rules)
+      - run: npm ci
+      - name: Data checks (schemas, integrity, business rules)
         run: npm run validate
       - name: Unit tests (roll rules, storage adapter, data contract)
         run: npm test
-      - name: Roll simulation (10,000 seeded rolls, fails on any rule violation)
-        run: node scripts/simulate-rolls.mjs

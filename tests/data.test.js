@@ -1,7 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { loadDataset, validateDataset } from "../scripts/validate-data.mjs";
-import { validateSchema } from "../scripts/lib/schema.mjs";
 
 const fresh = () => structuredClone(loadDataset());
 const errorsFor = (mutate) => { const ds = fresh(); mutate(ds); return validateDataset(ds); };
@@ -10,14 +9,9 @@ test("the shipped sample data passes every check", () => {
   assert.deepEqual(validateDataset(loadDataset()), []);
 });
 
-test("schema checker: types, required fields, patterns and unknown fields", () => {
-  const schema = { type: "object", required: ["a"], additionalProperties: false, properties: { a: { type: "string", pattern: "^x" }, b: { type: "integer", minimum: 2 } } };
-  assert.deepEqual(validateSchema({ a: "xy", b: 3 }, schema), []);
-  assert.equal(validateSchema({}, schema).length, 1);
-  assert.equal(validateSchema({ a: "yx" }, schema).length, 1);
-  assert.equal(validateSchema({ a: "x", b: 1 }, schema).length, 1);
-  assert.equal(validateSchema({ a: "x", c: 1 }, schema).length, 1);
-  assert.equal(validateSchema({ a: 5 }, schema).length, 1);
+test("rejects a week that does not match its schema", () => {
+  const errs = errorsFor((ds) => { ds.weeks["2026-11-16"].days[1].portions = "four"; });
+  assert.ok(errs.some((e) => /portions/.test(e)), errs.join("\n"));
 });
 
 test("rejects an ingredient that points at a missing shopping item", () => {
@@ -67,7 +61,7 @@ test("rejects a second wheat weeknight", () => {
 
 test("rejects a dish with no side", () => {
   const errs = errorsFor((ds) => { ds.weeks["2026-11-16"].days[1].side.ingredients = []; });
-  assert.ok(errs.some((e) => /side\.ingredients: needs at least 1/.test(e)));
+  assert.ok(errs.some((e) => /side\/ingredients must NOT have fewer than 1/.test(e)));
 });
 
 test("rejects a favourite whose slot disagrees with its cook time", () => {

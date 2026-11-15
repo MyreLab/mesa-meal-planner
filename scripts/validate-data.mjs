@@ -1,6 +1,6 @@
 // Data quality gate. Run with `npm run validate`; CI runs it on every push.
 //
-// Layer 1: structure. Every JSON file must match its schema in schemas/.
+// Layer 1: structure. Every JSON file must match its JSON Schema in schemas/ (checked with Ajv).
 // Layer 2: referential integrity. Every ingredient points at a shopping item, every item is used.
 // Layer 3: business rules from data/config.json (cook time, premium budget, exclusions, week shape).
 //
@@ -9,7 +9,7 @@
 import { readFileSync, readdirSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
-import { validateSchema } from "./lib/schema.mjs";
+import Ajv from "ajv";
 import { addDays } from "../js/randomizer.js";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -27,6 +27,13 @@ export function loadDataset(root = ROOT) {
   };
 }
 
+const ajv = new Ajv({ allErrors: true });
+const structureErrors = (value, schema) => {
+  const check = ajv.compile(schema);
+  if (check(value)) return [];
+  return check.errors.map((e) => `${e.instancePath || "(top level)"} ${e.message}${e.params.additionalProperty ? `: "${e.params.additionalProperty}"` : ""}`);
+};
+
 const isMonday = (iso) => new Date(iso + "T12:00:00Z").getUTCDay() === 1;
 const mentions = (text, word) => new RegExp(`\\b${word.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}`, "i").test(text);
 
@@ -35,10 +42,10 @@ export function validateDataset({ config, current, favorites, weeks, schemas }) 
   const fail = (where, msg) => errors.push(`${where}: ${msg}`);
 
   // ---- layer 1: structure
-  validateSchema(config, schemas.config).forEach((e) => fail("config.json", e));
-  validateSchema(current, schemas.current).forEach((e) => fail("current.json", e));
-  validateSchema(favorites, schemas.favorites).forEach((e) => fail("favorites.json", e));
-  for (const [id, week] of Object.entries(weeks)) validateSchema(week, schemas.week).forEach((e) => fail(`weeks/${id}.json`, e));
+  structureErrors(config, schemas.config).forEach((e) => fail("config.json", e));
+  structureErrors(current, schemas.current).forEach((e) => fail("current.json", e));
+  structureErrors(favorites, schemas.favorites).forEach((e) => fail("favorites.json", e));
+  for (const [id, week] of Object.entries(weeks)) structureErrors(week, schemas.week).forEach((e) => fail(`weeks/${id}.json`, e));
   if (errors.length) return errors; // semantic checks assume a well-formed shape
 
   // ---- pointers

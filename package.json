@@ -10,5 +10,10 @@
     "test": "node --test",
     "validate": "node scripts/validate-data.mjs"
   },
-  "engines": { "node": ">=20" }
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "ajv": "^8.20.0"
+  }
 }
