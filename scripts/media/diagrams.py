@@ -111,7 +111,7 @@ def architecture():
 
 def pipeline():
     s = Svg(1200, 700, "How a week gets planned: a small data pipeline",
-            "In real use an AI assistant runs the planning step on a schedule. Mesa is the front end that reads its output.")
+            "In real use Claude runs the planning step on a schedule. Mesa is the front end that reads its output.")
     P = "#5B3790"
     xs = [40, 330, 620, 910]; w = 250; y1, y2, h = 120, 360, 110
     n1 = [("1  Scheduled run", ["Starts the weekly planning", "job. No one has to remember."]),

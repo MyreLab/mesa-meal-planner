@@ -3,7 +3,7 @@
 This is the written rule set the weekly planning run follows when it produces `data/weeks/<monday>.json`.
 It is a generic version: the numbers below come from `data/config.json`, so a different household changes the config, not this document.
 
-The planning run is an AI assistant. It does not improvise the shape of the data. It reads this playbook, the config, the favourites and the saved roll, asks two questions, writes one JSON file, and then the validation gate (`npm run validate`) decides whether the file is allowed to ship.
+The planning run is Claude. It does not improvise the shape of the data. It reads this playbook, the config, the favourites and the saved roll, asks two questions, writes one JSON file, and then the validation gate (`npm run validate`) decides whether the file is allowed to ship.
 
 ## Inputs
 

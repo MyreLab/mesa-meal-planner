@@ -39,7 +39,7 @@ export function createMemoryAdapter() {
 export function createLocalAdapter(backend = globalThis.localStorage, namespace = "mesa:v1:") {
   return {
     kind: "localStorage",
-    label: "Saved on this device. Swap the storage adapter to sync between phones.",
+    label: "Saved on this device only. It does not sync between phones.",
     async get(key) {
       const raw = backend.getItem(namespace + key);
       return raw ? JSON.parse(raw) : null;

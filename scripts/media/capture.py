@@ -1,20 +1,24 @@
-"""Captures phone-sized screenshots, the hero and social images, and a short GIF of the running demo.
+"""Captures desktop-browser screenshots of every feature, terminal screenshots of the data checks,
+a short GIF, and the hero and social images.
 
 Usage:  python3 -m http.server 8000   (in one terminal, from the repo root)
         python3 scripts/media/capture.py
-Needs:  pip install playwright pillow  (set CHROME_PATH to use a system Chrome)
+Needs:  pip install playwright pillow, and Node for the terminal shots
+        (set CHROME_PATH to use a system Chrome)
 A fixed random seed is injected so the sample "Roll favourites" result is the same every time.
 """
-import io, os, tempfile
+import io, json, os, re, shutil, subprocess, tempfile
 from pathlib import Path
-from PIL import Image
+from PIL import Image, ImageFilter
 from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parents[2]
 SHOTS = ROOT / "docs" / "screenshots"
 BASE = os.environ.get("MESA_URL", "http://localhost:8000/")
+SHOWN_URL = "myrelab.github.io/mesa-meal-planner/"
 FONTS = (ROOT / "assets" / "fonts").as_uri()
 SHOTS.mkdir(parents=True, exist_ok=True)
+W = 760  # viewport width of the website shots
 
 SEED = """
 (() => { let a = 16 >>> 0;
@@ -24,102 +28,240 @@ SEED = """
 })();
 """
 
+FONT_CSS = f"""
+@font-face {{ font-family: Figtree; font-weight: 400; src: url({FONTS}/figtree-latin-400-normal.woff2); }}
+@font-face {{ font-family: Figtree; font-weight: 600; src: url({FONTS}/figtree-latin-600-normal.woff2); }}
+@font-face {{ font-family: "Young Serif"; src: url({FONTS}/young-serif-latin-400-normal.woff2); }}
+@font-face {{ font-family: "IBM Plex Mono"; font-weight: 400; src: url({FONTS}/ibm-plex-mono-latin-400-normal.woff2); }}
+@font-face {{ font-family: "IBM Plex Mono"; font-weight: 500; src: url({FONTS}/ibm-plex-mono-latin-500-normal.woff2); }}
+"""
+
+
 def launch(p):
     chrome = os.environ.get("CHROME_PATH")
     return p.chromium.launch(executable_path=chrome, args=["--no-sandbox"]) if chrome else p.chromium.launch()
 
-def open_page(browser, scale=2):
-    ctx = browser.new_context(viewport={"width": 390, "height": 844}, device_scale_factor=scale, is_mobile=True, has_touch=True)
-    ctx.add_init_script(SEED)
-    page = ctx.new_page()
-    page.goto(BASE); page.wait_for_selector("body[data-ready=true]")
-    return page
 
-def go(page, tab):
-    page.evaluate(f"location.hash = '#{tab}'"); page.wait_for_timeout(250)
+def render_html(browser, html, width, height, out, scale=2, selector=None):
+    """Renders an HTML snippet to a PNG."""
+    with tempfile.TemporaryDirectory() as tmp:
+        f = Path(tmp) / "x.html"
+        f.write_text("<!doctype html><meta charset=utf-8><style>" + FONT_CSS + "body{margin:0}</style>" + html)
+        pg = browser.new_page(viewport={"width": width, "height": height}, device_scale_factor=scale)
+        pg.goto(f.as_uri()); pg.wait_for_timeout(300)
+        (pg.locator(selector) if selector else pg).screenshot(path=str(out))
+        pg.close()
 
-def tick_some(page):
-    items = page.locator("#v-shop .store[data-store=club] .item")
-    for i in (0, 1, 2, 4): items.nth(i).locator("label.nm").click()
-    grocery_move = page.locator("#v-shop .store[data-store=club] .item").nth(6)
-    grocery_move.locator(".seg button[data-s=grocery]").click()
 
-def screens(browser):
-    page = open_page(browser)
-    page.screenshot(path=str(SHOTS / "week.png"))
-    go(page, "shop"); tick_some(page)
-    page.evaluate("document.querySelector('#lists').scrollIntoView()"); page.evaluate("window.scrollBy(0, -78)"); page.wait_for_timeout(200)
-    page.screenshot(path=str(SHOTS / "shop.png"))
-    go(page, "wed"); page.screenshot(path=str(SHOTS / "cook.png"))
-    go(page, "faves"); page.click("#roll"); page.wait_for_timeout(250)
-    page.screenshot(path=str(SHOTS / "faves.png"))
-    page.context.close()
+# ---------- the browser window around each website shot ----------
+
+def bar_png(browser, width, tab, scale):
+    out = Path(tempfile.gettempdir()) / f"mesa-bar-{width}-{tab}-{scale}.png"
+    url = SHOWN_URL + (f"#{tab}" if tab else "")
+    html = f"""<div id=b style="width:{width}px;height:40px;background:#ECE7F2;display:flex;align-items:center;gap:8px;padding:0 14px;box-sizing:border-box;border-bottom:1px solid #D9D2E3;font-family:Figtree,sans-serif">
+      <i style="width:11px;height:11px;border-radius:50%;background:#C9C1D6"></i><i style="width:11px;height:11px;border-radius:50%;background:#C9C1D6"></i><i style="width:11px;height:11px;border-radius:50%;background:#C9C1D6"></i>
+      <span style="margin-left:14px;flex:1;max-width:{width - 130}px;height:24px;border-radius:12px;background:#fff;color:#645B70;font-size:13px;line-height:24px;padding:0 14px;box-sizing:border-box;white-space:nowrap;overflow:hidden">{url}</span></div>"""
+    render_html(browser, html, width, 40, out, scale=scale, selector="#b")
+    return Image.open(out).convert("RGB")
+
+
+def framed(browser, raw: Image.Image, tab, scale=2):
+    bar = bar_png(browser, raw.width // scale, tab, scale)
+    img = Image.new("RGB", (raw.width + 2 * scale, raw.height + bar.height + 2 * scale), "#D9D2E3")
+    img.paste(bar, (scale, scale)); img.paste(raw, (scale, bar.height + scale))
+    return img
+
+
+# ---------- website screenshots ----------
+
+class Site:
+    def __init__(self, browser, height=620, scale=2):
+        self.browser, self.scale = browser, scale
+        self.ctx = browser.new_context(viewport={"width": W, "height": height}, device_scale_factor=scale)
+        self.ctx.add_init_script(SEED)
+        self.page = self.ctx.new_page()
+        self.page.goto(BASE); self.page.wait_for_selector("body[data-ready=true]")
+
+    def tab(self, name):
+        self.page.evaluate(f"location.hash = '#{name}'"); self.page.wait_for_timeout(250)
+        self.page.evaluate("window.scrollTo(0, 0)")
+
+    def scroll_to(self, selector, offset=-70):
+        self.page.evaluate(f"document.querySelector({json.dumps(selector)}).scrollIntoView()")
+        self.page.evaluate(f"window.scrollBy(0, {offset})"); self.page.wait_for_timeout(200)
+
+    def grab(self, name, tab, height=None):
+        if height: self.page.set_viewport_size({"width": W, "height": height})
+        self.page.wait_for_timeout(120)
+        raw = Image.open(io.BytesIO(self.page.screenshot())).convert("RGB")
+        framed(self.browser, raw, tab, self.scale).save(SHOTS / f"{name}.png", optimize=True)
+        print("wrote", name)
+
+    def close(self): self.ctx.close()
+
+
+def tick_some(s):
+    items = s.page.locator("#v-shop .store[data-store=club] .item")
+    for i in (0, 1, 2, 3): items.nth(i).locator("label.nm").click()
+
+
+def website_shots(browser):
+    s = Site(browser)
+    s.grab("week", "", 700)
+    # history: the earlier sample week
+    s.page.click("#weeknav button[data-week='2026-11-09']"); s.page.wait_for_timeout(250)
+    s.page.evaluate("window.scrollTo(0, 0)"); s.grab("weeks", "", 700)
+    s.page.click("#weeknav button[data-week='2026-11-16']"); s.page.wait_for_timeout(250)
+    # "We liked this" on a dish card
+    s.scroll_to("#v-week .like", -460)
+    s.page.locator("#v-week .like").first.click(); s.page.wait_for_timeout(250)
+    s.grab("like", "", 700)
+    # shop: store split, then ticks and a moved item, then hide ticked
+    s.tab("shop"); s.grab("shop", "shop", 760)
+    s.page.locator("#v-shop .store[data-store=club] .item").nth(3).locator(".seg button[data-s=grocery]").click(); s.page.wait_for_timeout(250)
+    s.scroll_to("#v-shop h3", -115); s.grab("shop-store", "shop", 700)
+    tick_some(s)
+    s.scroll_to("#lists", -90); s.grab("shop-ticks", "shop", 700)
+    s.page.check("#hide-done"); s.page.wait_for_timeout(200)
+    s.scroll_to("#lists", -90); s.grab("shop-hide", "shop", 700)
+    # cook
+    s.tab("wed"); s.grab("cook", "wed", 760)
+    # faves: before and after the roll
+    s.tab("faves"); s.page.set_viewport_size({"width": W, "height": 800}); s.grab("faves", "faves")
+    s.page.click("#roll"); s.page.wait_for_timeout(250); s.grab("roll", "faves", 800)
+    s.close()
+    # the demo rules panel in the footer
+    s = Site(browser)
+    s.page.evaluate("document.querySelector('#rules').open = true")
+    s.scroll_to("#rules", -60); s.grab("rules", "", 700)
+    s.close()
+
 
 def gif(browser):
-    page = open_page(browser, scale=1)
+    s = Site(browser, height=560, scale=1)
+    bar = bar_png(browser, W, "", 1)
     frames, durations = [], []
+
     def snap(ms):
-        frames.append(Image.open(io.BytesIO(page.screenshot())).convert("RGB")); durations.append(ms)
-    snap(1400)
-    page.evaluate("window.scrollTo(0, 560)"); page.wait_for_timeout(150); snap(1300)
-    page.evaluate("window.scrollTo(0, 0)")
-    go(page, "shop"); snap(1200)
-    items = page.locator("#v-shop .store[data-store=club] .item")
-    page.evaluate("document.querySelector('#lists').scrollIntoView()"); page.evaluate("window.scrollBy(0, -78)")
-    snap(900)
+        raw = Image.open(io.BytesIO(s.page.screenshot())).convert("RGB")
+        img = Image.new("RGB", (raw.width, raw.height + bar.height)); img.paste(bar, (0, 0)); img.paste(raw, (0, bar.height))
+        frames.append(img); durations.append(ms)
+
+    snap(1500)
+    s.page.evaluate("window.scrollTo(0, 520)"); s.page.wait_for_timeout(150); snap(1200)
+    s.tab("shop"); snap(1200)
+    items = s.page.locator("#v-shop .store[data-store=club] .item")
+    s.scroll_to("#lists", -90); snap(800)
     for i in (0, 1, 2):
-        items.nth(i).locator("label.nm").click(); page.wait_for_timeout(120); snap(650)
-    items.nth(4).locator(".seg button[data-s=grocery]").click(); page.wait_for_timeout(150); snap(1300)
-    go(page, "wed"); snap(1500)
-    go(page, "faves"); snap(1000)
-    page.click("#roll"); page.wait_for_timeout(250); snap(2600)
-    page.context.close()
+        items.nth(i).locator("label.nm").click(); s.page.wait_for_timeout(120); snap(600)
+    items.nth(4).locator(".seg button[data-s=grocery]").click(); s.page.wait_for_timeout(150); snap(1200)
+    s.page.check("#hide-done"); s.page.wait_for_timeout(150); snap(1400)
+    s.tab("wed"); snap(1500)
+    s.tab("faves"); snap(1000)
+    s.page.click("#roll"); s.page.wait_for_timeout(250); snap(2600)
+    s.close()
     pal = frames[0].quantize(colors=128, method=Image.Quantize.MEDIANCUT)
     q = [f.quantize(palette=pal, dither=Image.Dither.NONE) for f in frames]
     q[0].save(SHOTS / "demo.gif", save_all=True, append_images=q[1:], duration=durations, loop=0, optimize=True, disposal=2)
+    print("wrote demo.gif")
+
+
+# ---------- terminal and code screenshots ----------
+
+ANSI = re.compile(r"\x1b\[[0-9;]*m")
+esc = lambda t: t.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+
+
+def run(cmd, cwd=ROOT):
+    r = subprocess.run(cmd, shell=True, cwd=cwd, capture_output=True, text=True)
+    return ANSI.sub("", r.stdout + r.stderr).rstrip()
+
+
+def terminal_html(title, blocks, width):
+    body = ""
+    for cmd, out in blocks:
+        body += f'<div><span class=pr>$</span> <span class=cm>{esc(cmd)}</span></div>'
+        for line in out.splitlines():
+            cls = "ok" if line.startswith(("OK", "Data check passed", "No violations")) else "bad" if re.match(r"^\s*(FAIL|✖|x )", line) else ""
+            body += f'<div class="{cls}">{esc(line) or "&nbsp;"}</div>'
+        body += '<div style="height:10px"></div>'
+    return f"""<style>
+    #t{{width:{width}px;background:#221C2B;border-radius:10px;overflow:hidden;font-family:"IBM Plex Mono",monospace;font-size:13px;line-height:1.55;color:#E6DFF0}}
+    #t .hd{{background:#2E2638;padding:9px 14px;display:flex;gap:7px;align-items:center;color:#9A90A8;font-size:12px}}
+    #t .hd i{{width:10px;height:10px;border-radius:50%;background:#4A4057}}
+    #t .bd{{padding:14px 18px 6px;white-space:pre-wrap;word-break:break-word}}
+    .pr{{color:#B79BE8}} .cm{{color:#fff;font-weight:500}} .ok{{color:#8FD6A5}} .bad{{color:#F0A6A0}}
+    </style><div id=t><div class=hd><i></i><i></i><i></i><span style="margin-left:8px">{esc(title)}</span></div><div class=bd>{body}</div></div>"""
+
+
+def terminal_shots(browser):
+    ok = run("npm run validate --silent")
+    tests = "\n".join(l for l in run("node --test").splitlines() if l.startswith(("# tests", "# pass", "# fail")))
+    sim = run("node scripts/simulate-rolls.mjs").splitlines()
+    sim = "\n".join(l for l in sim if not l.startswith(("due", "wait")))[:600]
+    render_html(browser, terminal_html("terminal", [("npm run validate", ok), ("npm test", tests), ("node scripts/simulate-rolls.mjs", sim)], 760), 760, 600, SHOTS / "checks-pass.png", selector="#t")
+
+    # a deliberately broken week, to show the gate catching mistakes
+    with tempfile.TemporaryDirectory() as tmp:
+        t = Path(tmp)
+        for d in ("data", "schemas", "js"): shutil.copytree(ROOT / d, t / d)
+        (t / "scripts").mkdir(); shutil.copytree(ROOT / "scripts" / "lib", t / "scripts" / "lib")
+        shutil.copy(ROOT / "scripts" / "validate-data.mjs", t / "scripts"); shutil.copy(ROOT / "package.json", t)
+        f = t / "data" / "weeks" / "2026-11-16.json"; wk = json.loads(f.read_text())
+        wk["days"][1]["ingredients"].append({"item": "ghost-spice", "qty": "1 tsp", "text": "smoked paprika"})
+        wk["days"][3]["minutes"] = {"hands": 30, "total": 55}
+        wk["days"][2]["premium"] = True; wk["days"][4]["premium"] = True
+        f.write_text(json.dumps(wk, indent=2))
+        bad = run("node scripts/validate-data.mjs", cwd=t)
+    bad = bad.replace(str(t), ".")
+    render_html(browser, terminal_html("terminal", [("npm run validate", bad)], 760), 760, 400, SHOTS / "checks-fail.png", selector="#t")
+    print("wrote terminal shots")
+
+
+def json_shot(browser):
+    wk = json.loads((ROOT / "data" / "weeks" / "2026-11-16.json").read_text())
+    d = wk["days"][1]
+    snippet = {"key": d["key"], "date": d["date"], "dish": d["dish"], "protein": d["protein"], "wheat": d["wheat"],
+               "minutes": d["minutes"], "portions": d["portions"], "premium": d["premium"],
+               "ingredients": d["ingredients"][:2] + ["..."]}
+    txt = json.dumps(snippet, indent=2).replace('"..."', "...")
+    html = f"""<style>#j{{width:520px;background:#fff;border:1px solid #D9D2E3;border-radius:10px;overflow:hidden;font-family:"IBM Plex Mono",monospace;font-size:13px;line-height:1.5;color:#221C2B}}
+      #j .hd{{background:#F4F1F8;padding:8px 14px;color:#645B70;font-size:12px;border-bottom:1px solid #D9D2E3}} pre{{margin:0;padding:12px 16px}}</style>
+      <div id=j><div class=hd>data/weeks/2026-11-16.json (one day, shortened)</div><pre>{esc(txt)}</pre></div>"""
+    render_html(browser, html, 520, 500, SHOTS / "data-json.png", selector="#j")
+    print("wrote data-json")
+
+
+# ---------- hero and social ----------
 
 def compose(browser):
-    css = f"""
-    @font-face {{ font-family: Figtree; font-weight: 400; src: url({FONTS}/figtree-latin-400-normal.woff2); }}
-    @font-face {{ font-family: Figtree; font-weight: 600; src: url({FONTS}/figtree-latin-600-normal.woff2); }}
-    @font-face {{ font-family: "Young Serif"; src: url({FONTS}/young-serif-latin-400-normal.woff2); }}
-    body {{ margin:0; font-family: Figtree, sans-serif; color:#221C2B; }}
-    .stage {{ background: linear-gradient(135deg,#F4F1F8 0%,#E6DBF5 100%); position:relative; overflow:hidden; }}
-    .phone {{ width:260px; border-radius:34px; padding:9px; background:#221C2B; box-shadow:0 24px 48px rgba(34,28,43,.28); }}
-    .phone img {{ display:block; width:100%; border-radius:26px; }}
-    h1 {{ font-family:"Young Serif",serif; font-weight:400; margin:0; }}
-    p {{ margin:0; color:#645B70; }}
-    .pill {{ display:inline-block; padding:5px 12px; border-radius:999px; background:#ECE3F7; color:#5B3790; font-weight:600; font-size:14px; margin:0 6px 6px 0; }}
+    css = """
+    body { font-family: Figtree, sans-serif; color:#221C2B; }
+    .stage { background: linear-gradient(135deg,#F4F1F8 0%,#E6DBF5 100%); position:relative; overflow:hidden; }
+    .win { position:absolute; border-radius:10px; overflow:hidden; box-shadow:0 22px 44px rgba(34,28,43,.25); }
+    .win img { display:block; width:100%; }
+    h1 { font-family:"Young Serif",serif; font-weight:400; margin:0; }
+    p { margin:0; color:#645B70; }
     """
     uri = lambda n: (SHOTS / n).as_uri()
-    hero = f"""<style>{css}</style><div class=stage style="width:1500px;height:880px;padding:56px 64px">
-      <div style="width:1372px">
-       <h1 style="font-size:64px">Mesa</h1>
-       <p style="font-size:24px;margin-top:8px;max-width:720px">Six dinners, one shopping trip, packed lunches from leftovers.</p>
-       <div style="margin-top:18px"><span class=pill>plain HTML, CSS, JS</span><span class=pill>JSON data contracts</span><span class=pill>storage adapter</span><span class=pill>no build step</span></div>
-      </div>
-      <div style="display:flex;gap:34px;position:absolute;left:64px;top:230px">
-        {"".join(f'<div class=phone style="margin-top:{m}px"><img src="{uri(n)}"></div>' for n, m in [("week.png", 0), ("shop.png", 26), ("cook.png", 0), ("faves.png", 26)])}
-      </div></div>"""
+    hero = f"""<style>{css}</style><div class=stage style="width:1500px;height:820px">
+      <div style="position:absolute;left:72px;top:52px"><h1 style="font-size:64px">Mesa</h1>
+        <p style="font-size:24px;margin-top:8px">A weekly meal planner: six dinners, one shopping list, packed lunches from leftovers.</p></div>
+      <div class=win style="left:72px;top:210px;width:640px"><img src="{uri('week.png')}"></div>
+      <div class=win style="left:760px;top:250px;width:640px"><img src="{uri('shop-ticks.png')}"></div></div>"""
     social = f"""<style>{css}</style><div class=stage style="width:1280px;height:640px">
-      <div style="position:absolute;left:72px;top:150px;width:600px">
-        <h1 style="font-size:92px">Mesa</h1>
-        <p style="font-size:30px;margin-top:14px;line-height:1.3">A weekly meal planner: dinners, one shopping list, leftovers for lunch.</p>
-        <div style="margin-top:26px"><span class=pill>vanilla JS</span><span class=pill>JSON contracts</span><span class=pill>storage adapter</span></div>
-      </div>
-      <div class=phone style="position:absolute;left:760px;top:70px;transform:rotate(-4deg)"><img src="{uri('week.png')}"></div>
-      <div class=phone style="position:absolute;left:1010px;top:130px;transform:rotate(3deg)"><img src="{uri('shop.png')}"></div></div>"""
-    for name, html, w, h, out in [("hero", hero, 1500, 880, SHOTS / "hero.png"), ("social", social, 1280, 640, ROOT / "assets" / "social-preview.png")]:
-        with tempfile.TemporaryDirectory() as tmp:
-            f = Path(tmp) / f"{name}.html"; f.write_text("<!doctype html><meta charset=utf-8>" + html)
-            pg = browser.new_page(viewport={"width": w, "height": h}, device_scale_factor=1)
-            pg.goto(f.as_uri()); pg.wait_for_timeout(400)
-            pg.locator(".stage").screenshot(path=str(out)); pg.close()
-        print("wrote", out)
+      <div style="position:absolute;left:72px;top:170px;width:540px"><h1 style="font-size:92px">Mesa</h1>
+        <p style="font-size:30px;margin-top:14px;line-height:1.3">A personal project: a weekly meal planner built on JSON data and a data check.</p></div>
+      <div class=win style="left:700px;top:70px;width:470px;transform:rotate(-3deg)"><img src="{uri('week.png')}"></div>
+      <div class=win style="left:820px;top:290px;width:420px;transform:rotate(2deg)"><img src="{uri('shop-ticks.png')}"></div></div>"""
+    for html, w, h, out in [(hero, 1500, 820, SHOTS / "hero.png"), (social, 1280, 640, ROOT / "assets" / "social-preview.png")]:
+        render_html(browser, "<style>" + css + "</style>" + html, w, h, out, scale=1, selector=".stage")
+        print("wrote", out.name)
+
 
 if __name__ == "__main__":
     with sync_playwright() as p:
         b = launch(p)
-        screens(b); gif(b); compose(b)
+        website_shots(b); gif(b); terminal_shots(b); json_shot(b); compose(b)
         b.close()
     for f in sorted(SHOTS.iterdir()): print(f.name, f"{f.stat().st_size/1024:.0f} KB")
