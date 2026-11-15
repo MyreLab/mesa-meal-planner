@@ -1,3 +1,5 @@
+[![CI](https://github.com/MyreLab/mesa-meal-planner/actions/workflows/ci.yml/badge.svg)](https://github.com/MyreLab/mesa-meal-planner/actions/workflows/ci.yml)
+
 # Mesa
 
 ## What it is
@@ -6,9 +8,7 @@
 
 Try the [Live demo](https://myrelab.github.io/mesa-meal-planner/)
 
-[![CI](https://github.com/MyreLab/mesa-meal-planner/actions/workflows/ci.yml/badge.svg)](https://github.com/MyreLab/mesa-meal-planner/actions/workflows/ci.yml)
-
-![Walkthrough of Mesa in a browser: the week, switching weeks, the shopping list, cooking, favourites and the house rules](docs/screenshots/demo.gif)
+![Walkthrough of Mesa in a browser: the week, switching weeks, the shopping list, cooking, favourites and the house rules](docs/screenshots/walkthrough.gif)
 
 *Mesa* is Portuguese for "table". It is a dashboard made with plain HTML, CSS and JavaScript, with all the data stored in JSON files. It works in a desktop browser and on a phone.
 
