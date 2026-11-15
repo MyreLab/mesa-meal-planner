@@ -14,7 +14,7 @@ from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parents[2]
 SHOTS = ROOT / "docs" / "screenshots"
-BASE = os.environ.get("MESA_URL", "http://localhost:8000/")
+BASE = os.environ.get("MESA_URL", "http://localhost:8000/?fixed")
 SHOWN_URL = "myrelab.github.io/mesa-meal-planner/"
 FONTS = (ROOT / "assets" / "fonts").as_uri()
 SHOTS.mkdir(parents=True, exist_ok=True)
