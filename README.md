@@ -1,16 +1,16 @@
-[![CI](https://github.com/MyreLab/mesa-meal-planner/actions/workflows/ci.yml/badge.svg)](https://github.com/MyreLab/mesa-meal-planner/actions/workflows/ci.yml)
+[![CI tests ](https://github.com/MyreLab/mesa-meal-planner/actions/workflows/ci.yml/badge.svg)](https://github.com/MyreLab/mesa-meal-planner/actions/workflows/ci.yml)
 
 # Mesa
 
 ## What it is
 
-**A weekly meal planner that gives me six dinners, one shopping list and packed lunches from the leftovers.**
-
-Try the [Live demo](https://myrelab.github.io/mesa-meal-planner/)
-
-![Walkthrough of Mesa in a browser: the week, switching weeks, the shopping list, cooking, favourites and the house rules](docs/screenshots/walkthrough.gif)
+A weekly meal planner that gives me six dinners, one shopping list and packed lunches from the leftovers.
 
 *Mesa* is Portuguese for "table". It is a dashboard made with plain HTML, CSS and JavaScript, with all the data stored in JSON files. It works in a desktop browser and on a phone.
+
+**Try the [Live demo](https://myrelab.github.io/mesa-meal-planner/)**
+
+![Walkthrough of Mesa in a browser: the week, switching weeks, the shopping list, cooking, favourites and the house rules](docs/screenshots/walkthrough.gif)
 
 ## Why I made it
 
@@ -97,4 +97,4 @@ docs/                   playbook, diagram and screenshots
 
 ## Credits and license
 
-Built by [@MyreLab](https://github.com/MyreLab). Released under the [MIT license](LICENSE).
+Built by Myrela Bauman | [@MyreLab](https://github.com/MyreLab). Released under the [MIT license](LICENSE).
