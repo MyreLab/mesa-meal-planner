@@ -1,5 +1,5 @@
 """Captures desktop-browser screenshots of every feature, terminal screenshots of the data checks,
-a short GIF, and the hero and social images.
+a short GIF, and the hero image.
 
 Usage:  python3 -m http.server 8000   (in one terminal, from the repo root)
         python3 scripts/media/capture.py
@@ -58,16 +58,16 @@ def render_html(browser, html, width, height, out, scale=2, selector=None):
 def bar_png(browser, width, tab, scale):
     out = Path(tempfile.gettempdir()) / f"mesa-bar-{width}-{tab}-{scale}.png"
     url = SHOWN_URL + (f"#{tab}" if tab else "")
-    html = f"""<div id=b style="width:{width}px;height:40px;background:#ECE7F2;display:flex;align-items:center;gap:8px;padding:0 14px;box-sizing:border-box;border-bottom:1px solid #D9D2E3;font-family:Figtree,sans-serif">
-      <i style="width:11px;height:11px;border-radius:50%;background:#C9C1D6"></i><i style="width:11px;height:11px;border-radius:50%;background:#C9C1D6"></i><i style="width:11px;height:11px;border-radius:50%;background:#C9C1D6"></i>
-      <span style="margin-left:14px;flex:1;max-width:{width - 130}px;height:24px;border-radius:12px;background:#fff;color:#645B70;font-size:13px;line-height:24px;padding:0 14px;box-sizing:border-box;white-space:nowrap;overflow:hidden">{url}</span></div>"""
+    html = f"""<div id=b style="width:{width}px;height:40px;background:#2A2234;display:flex;align-items:center;gap:8px;padding:0 14px;box-sizing:border-box;border-bottom:1px solid #382E44;font-family:Figtree,sans-serif">
+      <i style="width:11px;height:11px;border-radius:50%;background:#4A4057"></i><i style="width:11px;height:11px;border-radius:50%;background:#4A4057"></i><i style="width:11px;height:11px;border-radius:50%;background:#4A4057"></i>
+      <span style="margin-left:14px;flex:1;max-width:{width - 130}px;height:24px;border-radius:12px;background:#17121D;color:#ABA0B8;font-size:13px;line-height:24px;padding:0 14px;box-sizing:border-box;white-space:nowrap;overflow:hidden">{url}</span></div>"""
     render_html(browser, html, width, 40, out, scale=scale, selector="#b")
     return Image.open(out).convert("RGB")
 
 
 def framed(browser, raw: Image.Image, tab, scale=2):
     bar = bar_png(browser, raw.width // scale, tab, scale)
-    img = Image.new("RGB", (raw.width + 2 * scale, raw.height + bar.height + 2 * scale), "#D9D2E3")
+    img = Image.new("RGB", (raw.width + 2 * scale, raw.height + bar.height + 2 * scale), "#382E44")
     img.paste(bar, (scale, scale)); img.paste(raw, (scale, bar.height + scale))
     return img
 
@@ -77,7 +77,7 @@ def framed(browser, raw: Image.Image, tab, scale=2):
 class Site:
     def __init__(self, browser, height=620, scale=2):
         self.browser, self.scale = browser, scale
-        self.ctx = browser.new_context(viewport={"width": W, "height": height}, device_scale_factor=scale)
+        self.ctx = browser.new_context(viewport={"width": W, "height": height}, device_scale_factor=scale, color_scheme="dark")
         self.ctx.add_init_script(SEED)
         self.page = self.ctx.new_page()
         self.page.goto(BASE); self.page.wait_for_selector("body[data-ready=true]")
@@ -225,38 +225,32 @@ def json_shot(browser):
                "minutes": d["minutes"], "portions": d["portions"], "premium": d["premium"],
                "ingredients": d["ingredients"][:2] + ["..."]}
     txt = json.dumps(snippet, indent=2).replace('"..."', "...")
-    html = f"""<style>#j{{width:520px;background:#fff;border:1px solid #D9D2E3;border-radius:10px;overflow:hidden;font-family:"IBM Plex Mono",monospace;font-size:13px;line-height:1.5;color:#221C2B}}
-      #j .hd{{background:#F4F1F8;padding:8px 14px;color:#645B70;font-size:12px;border-bottom:1px solid #D9D2E3}} pre{{margin:0;padding:12px 16px}}</style>
+    html = f"""<style>#j{{width:520px;background:#211A29;border:1px solid #382E44;border-radius:10px;overflow:hidden;font-family:"IBM Plex Mono",monospace;font-size:13px;line-height:1.5;color:#EBE5F2}}
+      #j .hd{{background:#2A2234;padding:8px 14px;color:#ABA0B8;font-size:12px;border-bottom:1px solid #382E44}} pre{{margin:0;padding:12px 16px}}</style>
       <div id=j><div class=hd>data/weeks/2026-11-16.json (one day, shortened)</div><pre>{esc(txt)}</pre></div>"""
     render_html(browser, html, 520, 500, SHOTS / "data-json.png", selector="#j")
     print("wrote data-json")
 
 
-# ---------- hero and social ----------
+# ---------- hero ----------
 
 def compose(browser):
     css = """
-    body { font-family: Figtree, sans-serif; color:#221C2B; }
-    .stage { background: linear-gradient(135deg,#F4F1F8 0%,#E6DBF5 100%); position:relative; overflow:hidden; }
-    .win { position:absolute; border-radius:10px; overflow:hidden; box-shadow:0 22px 44px rgba(34,28,43,.25); }
+    body { font-family: Figtree, sans-serif; color:#EBE5F2; }
+    .stage { background: linear-gradient(135deg,#17121D 0%,#2A1F3A 100%); position:relative; overflow:hidden; }
+    .win { position:absolute; border-radius:10px; overflow:hidden; box-shadow:0 22px 44px rgba(0,0,0,.45); }
     .win img { display:block; width:100%; }
     h1 { font-family:"Young Serif",serif; font-weight:400; margin:0; }
-    p { margin:0; color:#645B70; }
+    p { margin:0; color:#ABA0B8; }
     """
     uri = lambda n: (SHOTS / n).as_uri()
-    hero = f"""<style>{css}</style><div class=stage style="width:1500px;height:820px">
+    hero = f"""<div class=stage style="width:1500px;height:820px">
       <div style="position:absolute;left:72px;top:52px"><h1 style="font-size:64px">Mesa</h1>
         <p style="font-size:24px;margin-top:8px">A weekly meal planner: six dinners, one shopping list, packed lunches from leftovers.</p></div>
       <div class=win style="left:72px;top:210px;width:640px"><img src="{uri('week.png')}"></div>
       <div class=win style="left:760px;top:250px;width:640px"><img src="{uri('shop-ticks.png')}"></div></div>"""
-    social = f"""<style>{css}</style><div class=stage style="width:1280px;height:640px">
-      <div style="position:absolute;left:72px;top:170px;width:540px"><h1 style="font-size:92px">Mesa</h1>
-        <p style="font-size:30px;margin-top:14px;line-height:1.3">A personal project: a weekly meal planner built on JSON data and a data check.</p></div>
-      <div class=win style="left:700px;top:70px;width:470px;transform:rotate(-3deg)"><img src="{uri('week.png')}"></div>
-      <div class=win style="left:820px;top:290px;width:420px;transform:rotate(2deg)"><img src="{uri('shop-ticks.png')}"></div></div>"""
-    for html, w, h, out in [(hero, 1500, 820, SHOTS / "hero.png"), (social, 1280, 640, ROOT / "assets" / "social-preview.png")]:
-        render_html(browser, "<style>" + css + "</style>" + html, w, h, out, scale=1, selector=".stage")
-        print("wrote", out.name)
+    render_html(browser, "<style>" + css + "</style>" + hero, 1500, 820, SHOTS / "hero.png", scale=1, selector=".stage")
+    print("wrote hero.png")
 
 
 if __name__ == "__main__":
