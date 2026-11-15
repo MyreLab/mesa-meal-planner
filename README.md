@@ -1,34 +1,36 @@
 # Mesa
 
-**A personal project: a weekly meal planner that gives me six dinners, one shopping list and packed lunches from the leftovers.**
+## What it is
 
-[**Live demo**](https://myrelab.github.io/mesa-meal-planner/) (no login, runs on invented sample data) | [Planning playbook](docs/PLAYBOOK.md) | [Ideas for later](docs/ROADMAP.md)
+**A weekly meal planner that gives me six dinners, one shopping list and packed lunches from the leftovers.**
+
+[**Live demo**](https://myrelab.github.io/mesa-meal-planner/) | [Planning playbook](docs/PLAYBOOK.md) | [Ideas for later](docs/ROADMAP.md)
 
 ![Mesa in a browser: the week view and the shopping list](docs/screenshots/hero.png)
 
-*Mesa* is Portuguese and Spanish for "table". It is a small website made with plain HTML, CSS and JavaScript, with all the data stored in JSON files. It works in a desktop browser and on a phone.
+*Mesa* is Portuguese for "table". It is a dashboard made with plain HTML, CSS and JavaScript, with all the data stored in JSON files. It works in a desktop browser and on a phone.
 
 <p align="center"><img src="docs/screenshots/demo.gif" alt="Short screen recording: ticking items on the shopping list, switching a store, hiding ticked items, then rolling the favourites" width="640"></p>
 
 ## Why I made it
 
-I wanted one shopping trip a week and dinners that are healthy and varied, without planning from scratch every Sunday. Planning a week is mostly a data problem: cook time, budget and what is already in the fridge all have rules, and the plan has to be right before I shop from it.
+I wanted one shopping trip a week and dinners that are healthy and varied, with enough leftovers for my packed lunch the next day. I wanted all my ingredients in one shopping list, organised by aisle and preferred grocery store. I also wanted this automated and with no friction, so I don't waste my Sunday on another chore.
 
 ## What it does
 
-Mesa has four tabs: Week, Shop, Cook and Faves. Here is every feature, in the browser.
+Mesa has four tabs: Week, Shop, Cook and Faves. Here is every feature.
 
 <table>
 <tr>
 <td width="50%"><img src="docs/screenshots/week.png" alt="Week tab"><br><b>Week.</b> Six dinners and which one feeds which packed lunch, with protein and wheat icons.</td>
-<td width="50%"><img src="docs/screenshots/weeks.png" alt="Switching to the earlier week"><br><b>Weeks.</b> Switch to an earlier week to look back. Ticks are kept per week.</td>
+<td width="50%"><img src="docs/screenshots/weeks.png" alt="Switching to the earlier week"><br><b>Past weeks.</b> Switch to an earlier week to look back. Ticks are kept per week.</td>
 </tr>
 <tr>
 <td><img src="docs/screenshots/shop.png" alt="Shop tab with the store split"><br><b>Shop.</b> How many things to buy at each store, with quick presets and a Copy list button.</td>
 <td><img src="docs/screenshots/shop-store.png" alt="One item moved to another store"><br><b>Switch stores.</b> Move an item to another store and the lists regroup.</td>
 </tr>
 <tr>
-<td><img src="docs/screenshots/shop-ticks.png" alt="Ticked items on the shopping list"><br><b>Tick as you shop.</b> Ticks are remembered in the browser.</td>
+<td><img src="docs/screenshots/shop-ticks.png" alt="Ticked items on the shopping list"><br><b>Tick as you shop.</b> Ticks are remembered in the dashboard</td>
 <td><img src="docs/screenshots/shop-hide.png" alt="Ticked items hidden"><br><b>Hide ticked items</b> to see only what is left.</td>
 </tr>
 <tr>
@@ -46,7 +48,7 @@ Mesa has four tabs: Week, Shop, Cook and Faves. Here is every feature, in the br
 
 ## The data side
 
-This is the part I care about most.
+How a week gets planned: Claude Code runts the planning step on a schedule. Mesa is the front end that reads its output.
 
 ![Pipeline: a weekly plan is written, checked, published and read by the site](docs/diagrams/pipeline.png)
 
@@ -58,16 +60,12 @@ This is the part I care about most.
 
   <img src="docs/screenshots/checks-fail.png" alt="The data check reporting four problems" width="640">
 
-- **The weekly plan is written by Claude** from a written set of rules ([`docs/PLAYBOOK.md`](docs/PLAYBOOK.md)). I do not take the output on trust, which is why the check script exists.
+- **The weekly plan is written by Claude Code** from a written set of rules ([`docs/PLAYBOOK.md`](docs/PLAYBOOK.md)). I do not take the output on trust, which is why the check script exists.
 - **The favourites roll is a small function** ([`js/randomizer.js`](js/randomizer.js)) with rules: a dish has to rest for 28 days before it can come back, and a roll gives at most two picks. It has tests, and [`scripts/simulate-rolls.mjs`](scripts/simulate-rolls.mjs) runs 10,000 rolls to confirm no rule is ever broken:
 
   <img src="docs/screenshots/checks-pass.png" alt="The data check, the tests and the roll simulation all passing" width="640">
 
 - **Nothing is stored twice.** The days that use a shopping item are worked out from the recipes, so the list and the recipes cannot disagree.
-
-## Sample data
-
-Everything in `data/` is invented. The sample household is generic, the recipes are short methods written for this project, and there are no photographs.
 
 ## Run it yourself
 
