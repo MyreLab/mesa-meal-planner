@@ -170,43 +170,42 @@ def website_shots(browser):
 
 
 def gif(browser):
-    """One recording that walks through every feature, with each one circled as it is used."""
+    """One recording that walks through every feature. The still screenshots circle features; the GIF stays clean."""
     s = Site(browser, height=560, scale=1)
     bar = bar_png(browser, W, "", 1)
     frames, durations = [], []
 
-    def snap(ms, *rings):
-        if rings: s.ring(*rings)
+    def snap(ms):
         raw = Image.open(io.BytesIO(s.page.screenshot())).convert("RGB")
         img = Image.new("RGB", (raw.width, raw.height + bar.height)); img.paste(bar, (0, 0)); img.paste(raw, (0, bar.height))
         frames.append(img); durations.append(ms)
 
     # week grid, then the earlier week and back
-    s.scroll_to(".flow", -90); snap(1700, ".flow-grid")
-    s.page.evaluate("window.scrollTo(0, 0)"); s.page.click("#weeknav button[data-week='2026-11-09']"); s.page.wait_for_timeout(250); snap(1300, "#weeknav .seg")
-    s.page.click("#weeknav button[data-week='2026-11-16']"); s.page.wait_for_timeout(250); snap(900, "#weeknav .seg")
+    s.scroll_to(".flow", -90); snap(1700)
+    s.page.evaluate("window.scrollTo(0, 0)"); s.page.click("#weeknav button[data-week='2026-11-09']"); s.page.wait_for_timeout(250); snap(1300)
+    s.page.click("#weeknav button[data-week='2026-11-16']"); s.page.wait_for_timeout(250); snap(900)
     # shop: split and presets, a store switch, ticks, hide ticked
-    s.tab("shop"); s.scroll_to("#v-shop h3", -115); snap(1700, "#v-shop .split", "#v-shop .quick", "#copy")
-    s.scroll_to("#lists", -90); snap(1200, "#v-shop .store[data-store=costco] .item .seg@0")
+    s.tab("shop"); s.scroll_to("#v-shop h3", -115); snap(1700)
+    s.scroll_to("#lists", -90); snap(1200)
     costco_items(s).nth(3).locator(".seg button[data-s=whole-foods]").click(); s.page.wait_for_timeout(250)
-    s.scroll_to("#v-shop h3", -115); snap(1700, "#v-shop .split", "#v-shop .note b")
+    s.scroll_to("#v-shop h3", -115); snap(1700)
     s.scroll_to("#lists", -90); snap(700)
     for i in (0, 1, 2, 3):
-        costco_items(s).nth(i).locator("label.nm").click(); s.page.wait_for_timeout(120); snap(550, "#lists input:checked + .box")
-    snap(900, "#lists input:checked + .box")
-    s.page.check("#hide-done"); s.page.wait_for_timeout(200); s.scroll_to(".shop-bar", -90); snap(1700, ".toggle")
+        costco_items(s).nth(i).locator("label.nm").click(); s.page.wait_for_timeout(120); snap(550)
+    snap(900)
+    s.page.check("#hide-done"); s.page.wait_for_timeout(200); s.scroll_to(".shop-bar", -90); snap(1700)
     # cook: two days
-    s.tab("wed"); snap(1700, ".daypick", "#v-cook .callout@0")
-    s.page.click(".daypick a:nth-child(5)"); s.page.wait_for_timeout(250); s.page.evaluate("window.scrollTo(0, 0)"); snap(1300, ".daypick")
+    s.tab("wed"); snap(1700)
+    s.page.click(".daypick a:nth-child(5)"); s.page.wait_for_timeout(250); s.page.evaluate("window.scrollTo(0, 0)"); snap(1300)
     # like a dish
     s.tab("week"); s.scroll_to("#v-week .like", -460); s.page.locator("#v-week .like").first.click(); s.page.wait_for_timeout(250)
-    snap(1700, "#v-week .like@0")
+    snap(1700)
     # faves: rotation, then the roll
-    s.tab("faves"); s.scroll_to(".faves", -120); snap(1700, ".faves .fav > .chip")
+    s.tab("faves"); s.scroll_to(".faves", -120); snap(1700)
     s.page.evaluate("window.scrollTo(0, 0)"); s.page.click("#roll"); s.page.wait_for_timeout(250)
-    s.scroll_to(".rollbox", -100); snap(2400, ".picks", "#roll")
+    s.scroll_to(".rollbox", -100); snap(2400)
     # the house rules
-    s.page.evaluate("document.querySelector('#rules').open = true"); s.scroll_to("#rules", -60); snap(2200, "#rules")
+    s.page.evaluate("document.querySelector('#rules').open = true"); s.scroll_to("#rules", -60); snap(2200)
     s.close()
     # one shared palette built from several frames, so the circles keep their colour
     sample = frames[::3]
