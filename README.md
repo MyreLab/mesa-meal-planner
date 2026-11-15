@@ -4,7 +4,7 @@
 
 **A weekly meal planner that gives me six dinners, one shopping list and packed lunches from the leftovers.**
 
-[**Live demo**](https://myrelab.github.io/mesa-meal-planner/) | [Planning playbook](docs/PLAYBOOK.md) | [Ideas for later](docs/ROADMAP.md)
+Try the [Live demo](https://myrelab.github.io/mesa-meal-planner/)
 
 ![Walkthrough of Mesa in a browser: the week, switching weeks, the shopping list, cooking, favourites and the house rules](docs/screenshots/demo.gif)
 
