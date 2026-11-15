@@ -213,8 +213,8 @@ def gif(browser):
     for i, f in enumerate(sample): sheet.paste(f, (0, i * f.height))
     pal = sheet.quantize(colors=160, method=Image.Quantize.MEDIANCUT)
     q = [f.quantize(palette=pal, dither=Image.Dither.NONE) for f in frames]
-    q[0].save(SHOTS / "demo.gif", save_all=True, append_images=q[1:], duration=durations, loop=0, optimize=True, disposal=2)
-    print("wrote demo.gif", len(frames), "frames")
+    q[0].save(SHOTS / "walkthrough.gif", save_all=True, append_images=q[1:], duration=durations, loop=0, optimize=True, disposal=2)
+    print("wrote walkthrough.gif", len(frames), "frames")
 
 
 # ---------- terminal and code screenshots ----------
