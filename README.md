@@ -4,13 +4,11 @@
 
 **A weekly meal planner that gives me six dinners, one shopping list and packed lunches from the leftovers.**
 
-[**Live demo**](https://myrelab.github.io/mesa-meal-planner/) | [Planning playbook](docs/PLAYBOOK.md) | [Ideas for later](docs/ROADMAP.md)
+Try the [Live demo](https://myrelab.github.io/mesa-meal-planner/)
 
-![Mesa in a browser: the week view and the shopping list](docs/screenshots/hero.png)
+![Walkthrough of Mesa in a browser: the week, switching weeks, the shopping list, cooking, favourites and the house rules](docs/screenshots/demo.gif)
 
 *Mesa* is Portuguese for "table". It is a dashboard made with plain HTML, CSS and JavaScript, with all the data stored in JSON files. It works in a desktop browser and on a phone.
-
-<p align="center"><img src="docs/screenshots/demo.gif" alt="Short screen recording: ticking items on the shopping list, switching a store, hiding ticked items, then rolling the favourites" width="640"></p>
 
 ## Why I made it
 
@@ -48,7 +46,7 @@ Mesa has four tabs: Week, Shop, Cook and Faves. Here is every feature.
 
 ## The data side
 
-How a week gets planned: Claude Code runts the planning step on a schedule. Mesa is the front end that reads its output.
+How a week gets planned: Claude Code runs the planning step on a schedule. Mesa is the front end that reads its output.
 
 ![Pipeline: a weekly plan is written, checked, published and read by the site](docs/diagrams/pipeline.png)
 
@@ -97,5 +95,3 @@ docs/                   playbook, ideas, diagrams and screenshots
 ## Credits and license
 
 Built by [@MyreLab](https://github.com/MyreLab). Released under the [MIT license](LICENSE).
-
-Fonts: Figtree, Young Serif and IBM Plex Mono, all under the SIL Open Font License 1.1 (see [`assets/fonts/README.md`](assets/fonts/README.md)).

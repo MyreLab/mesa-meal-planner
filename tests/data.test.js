@@ -26,7 +26,7 @@ test("rejects an ingredient that points at a missing shopping item", () => {
 });
 
 test("rejects a shopping item no dish uses", () => {
-  const errs = errorsFor((ds) => { ds.weeks["2026-11-16"].items.push({ id: "orphan", store: "club", aisle: "Pantry", name: "Orphan", qty: "1", note: "" }); });
+  const errs = errorsFor((ds) => { ds.weeks["2026-11-16"].items.push({ id: "orphan", store: "costco", aisle: "Pantry", name: "Orphan", qty: "1", note: "" }); });
   assert.ok(errs.some((e) => /"orphan" is not used/.test(e)));
 });
 

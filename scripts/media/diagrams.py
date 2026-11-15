@@ -44,10 +44,8 @@ def dark(svg):
 def esc(s): return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
 
 class Svg:
-    def __init__(self, w, h, title, subtitle=None):
-        self.w, self.h, self.parts = w, h, []
-        self.parts.append(f'<text class="h" x="40" y="52">{esc(title)}</text>')
-        if subtitle: self.parts.append(f'<text class="s" x="40" y="76" style="font-size:14px">{esc(subtitle)}</text>')
+    def __init__(self, w, h, trim=0):
+        self.w, self.h, self.trim, self.parts = w, h - trim, trim, []
     def add(self, s): self.parts.append(s)
     def group(self, x, y, w, h, label):
         self.add(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="16" fill="none" stroke="#CFC4E0" stroke-dasharray="5 5"/>')
@@ -76,12 +74,11 @@ class Svg:
     def _render(self):
         colors = ["#5B3790", "#645B70", "#A33A26", "#9A6A12"]
         defs = "".join(f'<marker id="a{c[1:]}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,1 L10,5 L0,9 z" fill="{c}"/></marker>' for c in colors)
-        return f'<svg xmlns="http://www.w3.org/2000/svg" width="{self.w}" height="{self.h}" viewBox="0 0 {self.w} {self.h}"><defs>{defs}</defs><rect width="{self.w}" height="{self.h}" fill="#F4F1F8"/>{"".join(self.parts)}</svg>'
+        return f'<svg xmlns="http://www.w3.org/2000/svg" width="{self.w}" height="{self.h}" viewBox="0 {self.trim} {self.w} {self.h}"><defs>{defs}</defs><rect y="{self.trim}" width="{self.w}" height="{self.h}" fill="#F4F1F8"/>{"".join(self.parts)}</svg>'
 
 # ------------------------------------------------------------------ diagrams
 def pipeline():
-    s = Svg(1200, 700, "How a week gets planned",
-            "In real use Claude runs the planning step on a schedule. Mesa is the front end that reads its output.")
+    s = Svg(1200, 700, trim=70)
     P = "#5B3790"
     xs = [40, 330, 620, 910]; w = 250; y1, y2, h = 120, 360, 110
     n1 = [("1  Scheduled run", ["Starts the weekly planning", "job. No one has to remember."]),
@@ -91,7 +88,7 @@ def pipeline():
     for x, (t, l) in zip(xs, n1): s.box(x, y1, w, h, t, l, accent=P)
     n2 = [("5  Validation gate", ["Schema, integrity, rules.", "A bad week stops here."], "#ECE3F7", P),
           ("6  Publish", ["Commit to the repo (history", "of every week for free)."], "#fff", "#E0D8EA"),
-          ("7  Static hosting", ["GitHub Pages serves the", "JSON next to the page."], "#fff", "#E0D8EA"),
+          ("7  Hosting", ["The website hosts the JSON", "right next to the page."], "#fff", "#E0D8EA"),
           ("8  App reads it", ["data.js fetches the week,", "app.js renders four tabs."], "#fff", "#E0D8EA")]
     for x, (t, l, f, st) in zip(xs, n2): s.box(x, y2, w, h, t, l, fill=f, stroke=st, accent=P if f != "#fff" else None)
     for i in range(3): s.arrow([(xs[i] + w, y1 + 55), (xs[i + 1], y1 + 55)])

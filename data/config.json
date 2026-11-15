@@ -29,14 +29,14 @@
   ],
   "stores": [
     {
-      "id": "club",
-      "name": "Warehouse club",
-      "short": "WH"
+      "id": "costco",
+      "name": "Costco",
+      "short": "CO"
     },
     {
-      "id": "grocery",
-      "name": "Grocery",
-      "short": "GR"
+      "id": "whole-foods",
+      "name": "Whole Foods",
+      "short": "WF"
     },
     {
       "id": "home",
