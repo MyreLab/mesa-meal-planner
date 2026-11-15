@@ -59,9 +59,9 @@ How a week gets planned: Claude Code runs the planning step on a schedule. Mesa 
   <img src="docs/screenshots/checks-fail.png" alt="The data check reporting four problems" width="640">
 
 - **The weekly plan is written by Claude Code** from a written set of rules ([`docs/PLAYBOOK.md`](docs/PLAYBOOK.md)). I do not take the output on trust, which is why the check script exists.
-- **The favourites roll is a small function** ([`js/randomizer.js`](js/randomizer.js)) with rules: a dish has to rest for 28 days before it can come back, and a roll gives at most two picks. It has tests, and [`scripts/simulate-rolls.mjs`](scripts/simulate-rolls.mjs) runs 10,000 rolls to confirm no rule is ever broken:
+- **The favourites roll is a small function** ([`js/randomizer.js`](js/randomizer.js)) with rules: a dish has to rest for 28 days before it can come back, and a roll gives at most two picks. It has tests, including one that runs thousands of random rolls to check that no rule is ever broken:
 
-  <img src="docs/screenshots/checks-pass.png" alt="The data check, the tests and the roll simulation all passing" width="640">
+  <img src="docs/screenshots/checks-pass.png" alt="The data check and the tests passing" width="640">
 
 - **Nothing is stored twice.** The days that use a shopping item are worked out from the recipes, so the list and the recipes cannot disagree.
 
@@ -74,9 +74,10 @@ python3 -m http.server
 # open http://localhost:8000
 ```
 
-Checks need Node 20 or newer and nothing else to install:
+Checks need Node 20 or newer:
 
 ```bash
+npm install         # once
 npm test            # tests
 npm run validate    # checks the data files
 ```
@@ -87,9 +88,9 @@ npm run validate    # checks the data files
 index.html, css/, js/   the website
 data/                   sample rules, favourites and weeks (JSON)
 schemas/                the expected shape of each data file
-scripts/                the data check and the roll simulation
+scripts/                the data check and the image generators
 tests/                  tests
-docs/                   playbook, ideas, diagrams and screenshots
+docs/                   playbook, diagram and screenshots
 ```
 
 ## Credits and license

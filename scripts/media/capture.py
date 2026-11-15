@@ -249,15 +249,13 @@ def terminal_html(title, blocks, width):
 def terminal_shots(browser):
     ok = run("npm run validate --silent")
     tests = "\n".join(l for l in run("node --test").splitlines() if l.startswith(("# tests", "# pass", "# fail")))
-    sim = run("node scripts/simulate-rolls.mjs").splitlines()
-    sim = "\n".join(l for l in sim if not l.startswith(("due", "wait")))[:600]
-    render_html(browser, terminal_html("terminal", [("npm run validate", ok), ("npm test", tests), ("node scripts/simulate-rolls.mjs", sim)], 760), 760, 600, SHOTS / "checks-pass.png", selector="#t")
+    render_html(browser, terminal_html("terminal", [("npm run validate", ok), ("npm test", tests)], 760), 760, 600, SHOTS / "checks-pass.png", selector="#t")
 
     # a deliberately broken week, to show the gate catching mistakes
     with tempfile.TemporaryDirectory() as tmp:
         t = Path(tmp)
         for d in ("data", "schemas", "js"): shutil.copytree(ROOT / d, t / d)
-        (t / "scripts").mkdir(); shutil.copytree(ROOT / "scripts" / "lib", t / "scripts" / "lib")
+        (t / "scripts").mkdir(); (t / "node_modules").symlink_to(ROOT / "node_modules")
         shutil.copy(ROOT / "scripts" / "validate-data.mjs", t / "scripts"); shutil.copy(ROOT / "package.json", t)
         f = t / "data" / "weeks" / "2026-11-16.json"; wk = json.loads(f.read_text())
         wk["days"][1]["ingredients"].append({"item": "ghost-spice", "qty": "1 tsp", "text": "smoked paprika"})
