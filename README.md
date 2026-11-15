@@ -64,7 +64,7 @@ Static files are written by the planning run and are read-only for the app. Save
 
 ![Pipeline: scheduled run, questions, inputs, write, validate, publish, host, read, with a feedback loop](docs/diagrams/pipeline.png)
 
-In real use an AI assistant (Claude Code) runs on a weekly schedule. It asks what is left in the fridge and which dishes were liked, then writes the next week's JSON by following a written playbook of rules ([`docs/PLAYBOOK.md`](docs/PLAYBOOK.md) is a generic version of it). The file then has to pass the validation gate before it is published, and the household's ticks, likes and rolls flow back in as inputs for the next run.
+In real use Claude runs on a weekly schedule. It asks what is left in the fridge and which dishes were liked, then writes the next week's JSON by following a written playbook of rules ([`docs/PLAYBOOK.md`](docs/PLAYBOOK.md) is a generic version of it). The file then has to pass the validation gate before it is published, and the household's ticks, likes and rolls flow back in as inputs for the next run.
 
 Mesa itself is the front end. This repo ships invented sample data so anyone can open it and try it.
 
