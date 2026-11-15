@@ -3,6 +3,7 @@
 import { loadConfig, loadCurrent, loadWeek, loadFavorites } from "./data.js";
 import { createStorage, keys } from "./storage.js";
 import * as rules from "./randomizer.js";
+import { localISO } from "./demo-dates.js";
 import { DAY_KEYS, esc, fmtDate, fmtWeekday } from "./ui/util.js";
 import { renderWeek, bindWeek } from "./ui/week.js";
 import { renderShop, bindShop } from "./ui/shop.js";
@@ -19,7 +20,7 @@ async function boot() {
 
   const storage = createStorage();
   const stores = config.stores;
-  const today = params.has("live") || !current.asOf ? localISO() : current.asOf;
+  const today = current.asOf || localISO(); // real date, or the pinned demo date with ?fixed
   const ruleSet = { ...rules.DEFAULT_RULES, ...config.favorites };
 
   const ctx = {
@@ -184,11 +185,6 @@ async function boot() {
     armed = false; resetBtn.textContent = "Reset demo data"; actions.resetDemo();
   });
   document.body.dataset.ready = "true";
-}
-
-function localISO() {
-  const t = new Date();
-  return new Date(t.getTime() - t.getTimezoneOffset() * 60000).toISOString().slice(0, 10);
 }
 
 boot().catch((err) => {
