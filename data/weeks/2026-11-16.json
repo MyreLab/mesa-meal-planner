@@ -1,0 +1,1029 @@
+{
+  "schemaVersion": 1,
+  "week": "2026-11-16",
+  "shopDay": "2026-11-15",
+  "title": "Week of Nov 16",
+  "summary": "Six dinners, each with a side: a weekend stew that uses up the fridge, four weeknights of about 30 minutes, then a pasta Friday. Four packed lunches from leftovers, one shopping trip.",
+  "meta": {
+    "source": "sample-data",
+    "playbook": "docs/PLAYBOOK.md",
+    "createdOn": "2026-11-13"
+  },
+  "lunches": {
+    "wknd": null,
+    "mon": null,
+    "tue": "mon",
+    "wed": "tue",
+    "thu": "wed",
+    "fri": "thu"
+  },
+  "days": [
+    {
+      "key": "wknd",
+      "date": "2026-11-15",
+      "dish": "Smoky white bean and kale stew with a soft egg",
+      "short": "Bean stew",
+      "origin": "Tuscan-style",
+      "protein": "beans",
+      "proteinLabel": "White beans + egg",
+      "wheat": "free",
+      "minutes": {
+        "hands": 20,
+        "total": 55
+      },
+      "portions": 2,
+      "feeds": "Dinner for two",
+      "headsUp": "Clears out the end-of-week fridge: the kale, two carrots and a couple of celery stalks. A longer simmer, so it lives on the weekend.",
+      "ingredients": [
+        {
+          "item": "kale",
+          "qty": "1 bunch",
+          "text": "kale, stems removed, leaves torn"
+        },
+        {
+          "item": "carrots",
+          "qty": "2",
+          "text": "carrots, diced"
+        },
+        {
+          "item": "celery",
+          "qty": "2 stalks",
+          "text": "celery, diced"
+        },
+        {
+          "item": "onions",
+          "qty": "1",
+          "text": "onion, chopped"
+        },
+        {
+          "item": "garlic",
+          "qty": "4 cloves",
+          "text": "garlic, sliced"
+        },
+        {
+          "item": "white-beans",
+          "qty": "2 cans",
+          "text": "white beans, drained"
+        },
+        {
+          "item": "broth",
+          "qty": "3 cups",
+          "text": "broth"
+        },
+        {
+          "item": "tomato-paste",
+          "qty": "2 tbsp",
+          "text": "tomato paste"
+        },
+        {
+          "item": "smoked-paprika",
+          "qty": "1 tsp",
+          "text": "smoked paprika"
+        },
+        {
+          "item": "eggs",
+          "qty": "2",
+          "text": "eggs"
+        },
+        {
+          "item": "olive-oil",
+          "qty": "2 tbsp",
+          "text": "olive oil"
+        }
+      ],
+      "steps": [
+        "Warm the oil in a wide pot over medium heat. Cook the onion, carrots and celery with a pinch of salt for 8 minutes, until soft.",
+        "Stir in the garlic, tomato paste and paprika for a minute, then add the beans and broth. Simmer gently for 25 minutes, mashing a few beans against the side to thicken it.",
+        "Add the kale and cook 5 more minutes. Taste and adjust the salt and pepper.",
+        "Make two wells in the stew, crack in the eggs, cover and cook 3 to 4 minutes, until the whites are set."
+      ],
+      "side": {
+        "name": "Crisp cucumber and radish salad",
+        "ingredients": [
+          {
+            "item": "cucumbers",
+            "qty": "2",
+            "text": "cucumbers, sliced"
+          },
+          {
+            "item": "radishes",
+            "qty": "1 bunch",
+            "text": "radishes, thinly sliced"
+          },
+          {
+            "item": "lemons",
+            "qty": "1",
+            "text": "lemon, juiced"
+          },
+          {
+            "item": "olive-oil",
+            "qty": "1 tbsp",
+            "text": "olive oil"
+          }
+        ],
+        "steps": [
+          "Toss the cucumber and radishes with the lemon juice, oil and a pinch of salt. Serve cold next to the stew."
+        ]
+      },
+      "notes": [
+        "Freezes well without the eggs."
+      ],
+      "source": {
+        "label": "Original sample recipe",
+        "url": ""
+      },
+      "premium": false,
+      "wheatNote": "",
+      "pairing": null
+    },
+    {
+      "key": "mon",
+      "date": "2026-11-16",
+      "dish": "Lemon-garlic chicken thighs",
+      "short": "Lemon chicken",
+      "origin": "Mediterranean-style",
+      "protein": "chicken",
+      "proteinLabel": "Chicken thighs",
+      "wheat": "free",
+      "minutes": {
+        "hands": 15,
+        "total": 35
+      },
+      "portions": 4,
+      "feeds": "Dinner + Tue lunch",
+      "headsUp": "Cook all 8 thighs: 4 are dinner and 4 get packed for Tuesday. The broccoli roasts on a second tray at the same time.",
+      "ingredients": [
+        {
+          "item": "chicken-thighs",
+          "qty": "8",
+          "text": "boneless chicken thighs"
+        },
+        {
+          "item": "lemons",
+          "qty": "1",
+          "text": "lemon, zested and juiced"
+        },
+        {
+          "item": "garlic",
+          "qty": "4 cloves",
+          "text": "garlic, crushed"
+        },
+        {
+          "item": "oregano",
+          "qty": "1 tsp",
+          "text": "dried oregano"
+        },
+        {
+          "item": "dijon",
+          "qty": "1 tbsp",
+          "text": "Dijon mustard"
+        },
+        {
+          "item": "olive-oil",
+          "qty": "3 tbsp",
+          "text": "olive oil"
+        }
+      ],
+      "steps": [
+        "Heat the oven to 425F. Whisk the lemon zest and juice, garlic, oregano, mustard and 2 tbsp of the oil with a large pinch of salt.",
+        "Toss the thighs in the marinade and leave them for 10 minutes while the oven finishes heating.",
+        "Spread on a lined tray and roast 22 to 25 minutes, until browned and cooked through (165F inside).",
+        "Rest for 5 minutes and spoon over any tray juices. Pack half for Tuesday."
+      ],
+      "side": {
+        "name": "Charred broccoli with chili and lemon",
+        "ingredients": [
+          {
+            "item": "broccoli",
+            "qty": "1 1/2 lb",
+            "text": "broccoli florets"
+          },
+          {
+            "item": "lemons",
+            "qty": "1",
+            "text": "lemon, in wedges"
+          },
+          {
+            "item": "chili-flakes",
+            "qty": "a pinch",
+            "text": "chili flakes"
+          },
+          {
+            "item": "olive-oil",
+            "qty": "1 tbsp",
+            "text": "olive oil"
+          }
+        ],
+        "steps": [
+          "Toss the florets with the oil, chili flakes and salt, spread on a second tray and roast beside the chicken for the last 18 minutes, until the tips char. Finish with lemon."
+        ]
+      },
+      "source": {
+        "label": "Original sample recipe",
+        "url": ""
+      },
+      "premium": false,
+      "notes": [],
+      "wheatNote": "",
+      "pairing": null
+    },
+    {
+      "key": "tue",
+      "date": "2026-11-17",
+      "dish": "Turkey and zucchini meatballs in tomato sauce",
+      "short": "Turkey balls",
+      "origin": "Italian-American",
+      "protein": "turkey",
+      "proteinLabel": "Ground turkey",
+      "wheat": "check",
+      "wheatNote": "Rolled oats bind the meatballs instead of breadcrumbs. Look for oats labelled gluten-free.",
+      "minutes": {
+        "hands": 20,
+        "total": 40
+      },
+      "portions": 4,
+      "feeds": "Dinner + Wed lunch",
+      "headsUp": "Grated zucchini keeps lean turkey juicy. Make the full batch and pack half for Wednesday.",
+      "ingredients": [
+        {
+          "item": "ground-turkey",
+          "qty": "1 1/2 lb",
+          "text": "ground turkey"
+        },
+        {
+          "item": "zucchini",
+          "qty": "2",
+          "text": "zucchini, grated and squeezed dry"
+        },
+        {
+          "item": "oats",
+          "qty": "1/2 cup",
+          "text": "rolled oats"
+        },
+        {
+          "item": "eggs",
+          "qty": "1",
+          "text": "egg"
+        },
+        {
+          "item": "parmesan",
+          "qty": "1/3 cup",
+          "text": "grated Parmesan"
+        },
+        {
+          "item": "garlic",
+          "qty": "2 cloves",
+          "text": "garlic, grated"
+        },
+        {
+          "item": "crushed-tomatoes",
+          "qty": "1 can",
+          "text": "crushed tomatoes (28 oz)"
+        },
+        {
+          "item": "basil",
+          "qty": "1/2 bunch",
+          "text": "basil leaves"
+        },
+        {
+          "item": "olive-oil",
+          "qty": "2 tbsp",
+          "text": "olive oil"
+        }
+      ],
+      "steps": [
+        "Mix the turkey, zucchini, oats, egg, Parmesan, garlic, 1 tsp salt and plenty of pepper. Roll into about 20 balls.",
+        "Brown the meatballs in the oil in a wide skillet over medium-high heat, around 6 minutes, turning once. They do not need to cook through yet.",
+        "Pour in the tomatoes with a splash of water, tuck the balls in, cover and simmer 15 minutes.",
+        "Tear in the basil. Pack half for Wednesday."
+      ],
+      "side": {
+        "name": "Garlicky cauliflower rice",
+        "ingredients": [
+          {
+            "item": "cauliflower-rice",
+            "qty": "2 bags",
+            "text": "frozen cauliflower rice"
+          },
+          {
+            "item": "garlic",
+            "qty": "2 cloves",
+            "text": "garlic, minced"
+          },
+          {
+            "item": "olive-oil",
+            "qty": "1 tbsp",
+            "text": "olive oil"
+          }
+        ],
+        "steps": [
+          "Cook the garlic in the oil for 30 seconds, add the frozen cauliflower rice and cook, stirring, 6 to 7 minutes until tender and dry. Season with salt."
+        ]
+      },
+      "source": {
+        "label": "Original sample recipe",
+        "url": ""
+      },
+      "premium": false,
+      "notes": [],
+      "pairing": null
+    },
+    {
+      "key": "wed",
+      "date": "2026-11-18",
+      "dish": "Crispy tofu with peanut-lime sauce",
+      "short": "Peanut tofu",
+      "origin": "Southeast Asian-inspired",
+      "protein": "tofu",
+      "proteinLabel": "Extra-firm tofu",
+      "wheat": "check",
+      "wheatNote": "Tamari is usually wheat-free, but check the label.",
+      "minutes": {
+        "hands": 15,
+        "total": 30
+      },
+      "portions": 4,
+      "feeds": "Dinner + Thu lunch",
+      "headsUp": "Press the tofu while the oven heats: wrap it in a clean towel and rest something heavy on top for 10 minutes.",
+      "ingredients": [
+        {
+          "item": "tofu",
+          "qty": "2 blocks",
+          "text": "extra-firm tofu, pressed and cubed"
+        },
+        {
+          "item": "cornstarch",
+          "qty": "1 tbsp",
+          "text": "cornstarch"
+        },
+        {
+          "item": "olive-oil",
+          "qty": "2 tbsp",
+          "text": "oil"
+        },
+        {
+          "item": "peanut-butter",
+          "qty": "1/4 cup",
+          "text": "natural peanut butter"
+        },
+        {
+          "item": "tamari",
+          "qty": "2 tbsp",
+          "text": "tamari"
+        },
+        {
+          "item": "limes",
+          "qty": "2",
+          "text": "limes, juiced"
+        },
+        {
+          "item": "ginger",
+          "qty": "1 tbsp",
+          "text": "fresh ginger, grated"
+        },
+        {
+          "item": "scallions",
+          "qty": "1 bunch",
+          "text": "scallions, sliced"
+        }
+      ],
+      "steps": [
+        "Heat the oven to 425F. Toss the pressed tofu with the cornstarch, oil and a pinch of salt.",
+        "Bake on a lined tray for 25 minutes, flipping halfway, until golden and crisp at the edges.",
+        "Whisk the peanut butter, tamari, lime juice, ginger and 3 tbsp warm water until pourable.",
+        "Toss the tofu in half the sauce, scatter with scallions and serve the rest at the table. Pack half for Thursday."
+      ],
+      "side": {
+        "name": "Quick-pickled carrot ribbons",
+        "ingredients": [
+          {
+            "item": "carrots-fresh",
+            "qty": "3",
+            "text": "carrots, peeled into ribbons"
+          },
+          {
+            "item": "rice-vinegar",
+            "qty": "3 tbsp",
+            "text": "rice vinegar"
+          }
+        ],
+        "steps": [
+          "Toss the ribbons with the vinegar and a pinch of salt and leave them while the tofu bakes. They are ready in 15 minutes."
+        ]
+      },
+      "source": {
+        "label": "Original sample recipe",
+        "url": ""
+      },
+      "premium": false,
+      "notes": [],
+      "pairing": null
+    },
+    {
+      "key": "thu",
+      "date": "2026-11-19",
+      "dish": "Paprika beef and pepper skillet",
+      "short": "Beef skillet",
+      "origin": "Tex-Mex-inspired",
+      "protein": "beef",
+      "proteinLabel": "Ground beef",
+      "wheat": "free",
+      "minutes": {
+        "hands": 15,
+        "total": 30
+      },
+      "portions": 4,
+      "feeds": "Dinner + Fri lunch",
+      "headsUp": "Black beans stretch the beef, and everything cooks in one pan.",
+      "ingredients": [
+        {
+          "item": "ground-beef",
+          "qty": "1 1/2 lb",
+          "text": "ground beef"
+        },
+        {
+          "item": "bell-peppers",
+          "qty": "3",
+          "text": "bell peppers, sliced"
+        },
+        {
+          "item": "onions",
+          "qty": "1",
+          "text": "onion, sliced"
+        },
+        {
+          "item": "black-beans",
+          "qty": "1 can",
+          "text": "black beans, drained"
+        },
+        {
+          "item": "smoked-paprika",
+          "qty": "1 tsp",
+          "text": "smoked paprika"
+        },
+        {
+          "item": "cumin",
+          "qty": "1 tsp",
+          "text": "ground cumin"
+        },
+        {
+          "item": "garlic",
+          "qty": "2 cloves",
+          "text": "garlic, minced"
+        },
+        {
+          "item": "limes",
+          "qty": "1",
+          "text": "lime, juiced"
+        },
+        {
+          "item": "olive-oil",
+          "qty": "1 tbsp",
+          "text": "olive oil"
+        }
+      ],
+      "steps": [
+        "Brown the beef in a large skillet over medium-high heat, breaking it up, about 7 minutes. Move it to a bowl and pour off most of the fat.",
+        "In the same pan, soften the onion and peppers in the oil for 8 minutes.",
+        "Return the beef with the garlic, paprika and cumin. Add the beans and 1/4 cup water and simmer 5 minutes.",
+        "Finish with the lime juice and salt. Pack half for Friday."
+      ],
+      "side": {
+        "name": "Avocado and tomato salad",
+        "ingredients": [
+          {
+            "item": "avocados",
+            "qty": "2",
+            "text": "avocados, cubed"
+          },
+          {
+            "item": "cherry-tomatoes",
+            "qty": "1 pint",
+            "text": "cherry tomatoes, halved"
+          },
+          {
+            "item": "red-onion",
+            "qty": "1/2",
+            "text": "red onion, finely diced"
+          },
+          {
+            "item": "limes",
+            "qty": "1",
+            "text": "lime, juiced"
+          }
+        ],
+        "steps": [
+          "Toss everything with the lime juice and a pinch of salt right before serving."
+        ]
+      },
+      "source": {
+        "label": "Original sample recipe",
+        "url": ""
+      },
+      "premium": false,
+      "notes": [],
+      "wheatNote": "",
+      "pairing": null
+    },
+    {
+      "key": "fri",
+      "date": "2026-11-20",
+      "dish": "Turkey sausage rigatoni with slow tomato sauce",
+      "short": "Sausage pasta",
+      "origin": "Comfort-food night",
+      "protein": "turkey",
+      "proteinLabel": "Turkey sausage",
+      "wheat": "contains",
+      "wheatNote": "Pasta contains wheat. Friday is the indulgent night.",
+      "minutes": {
+        "hands": 15,
+        "total": 40
+      },
+      "portions": 2,
+      "feeds": "Dinner for two",
+      "headsUp": "The one wheat dinner of the week. Squeeze the sausage out of its casings and let it brown properly before the tomatoes go in.",
+      "ingredients": [
+        {
+          "item": "turkey-sausage",
+          "qty": "1 lb",
+          "text": "turkey sausage, casings removed"
+        },
+        {
+          "item": "rigatoni",
+          "qty": "8 oz",
+          "text": "rigatoni"
+        },
+        {
+          "item": "onions",
+          "qty": "1",
+          "text": "onion, chopped"
+        },
+        {
+          "item": "garlic",
+          "qty": "3 cloves",
+          "text": "garlic, minced"
+        },
+        {
+          "item": "tomato-paste",
+          "qty": "1 tbsp",
+          "text": "tomato paste"
+        },
+        {
+          "item": "fennel-seeds",
+          "qty": "1/2 tsp",
+          "text": "fennel seeds"
+        },
+        {
+          "item": "chili-flakes",
+          "qty": "a pinch",
+          "text": "chili flakes"
+        },
+        {
+          "item": "crushed-tomatoes",
+          "qty": "1 can",
+          "text": "crushed tomatoes (28 oz)"
+        },
+        {
+          "item": "parmesan",
+          "qty": "1/4 cup",
+          "text": "grated Parmesan"
+        },
+        {
+          "item": "olive-oil",
+          "qty": "1 tbsp",
+          "text": "olive oil"
+        }
+      ],
+      "steps": [
+        "Brown the sausage in the oil in a wide pan, breaking it up, for 8 minutes. Add the onion and cook until soft, another 5.",
+        "Stir in the garlic, tomato paste, fennel seeds and chili flakes for a minute, then add the tomatoes. Simmer 20 minutes, until glossy.",
+        "Meanwhile cook the rigatoni in well-salted water until just short of done. Save a mug of the cooking water.",
+        "Toss the pasta through the sauce with a splash of the water and the Parmesan."
+      ],
+      "side": {
+        "name": "Arugula salad with lemon and Parmesan",
+        "ingredients": [
+          {
+            "item": "arugula",
+            "qty": "1 tub",
+            "text": "baby arugula"
+          },
+          {
+            "item": "lemons",
+            "qty": "1",
+            "text": "lemon, juiced"
+          },
+          {
+            "item": "parmesan",
+            "qty": "a few shavings",
+            "text": "Parmesan, shaved"
+          },
+          {
+            "item": "olive-oil",
+            "qty": "1 tbsp",
+            "text": "olive oil"
+          }
+        ],
+        "steps": [
+          "Dress the arugula with the lemon juice, oil and a pinch of salt. Top with Parmesan shavings."
+        ]
+      },
+      "pairing": {
+        "item": "red-wine",
+        "text": "A medium-bodied Italian-style red suits the tomato and sausage. Optional."
+      },
+      "source": {
+        "label": "Original sample recipe",
+        "url": ""
+      },
+      "premium": false,
+      "notes": []
+    }
+  ],
+  "items": [
+    {
+      "id": "kale",
+      "store": "home",
+      "aisle": "In the fridge",
+      "name": "Kale",
+      "qty": "1 bunch",
+      "note": "Use it up on Sunday"
+    },
+    {
+      "id": "carrots",
+      "store": "home",
+      "aisle": "In the fridge",
+      "name": "Carrots",
+      "qty": "2",
+      "note": "Use them up on Sunday"
+    },
+    {
+      "id": "celery",
+      "store": "home",
+      "aisle": "In the fridge",
+      "name": "Celery",
+      "qty": "2 stalks",
+      "note": "Use it up on Sunday"
+    },
+    {
+      "id": "onions",
+      "store": "home",
+      "aisle": "Pantry",
+      "name": "Onions",
+      "qty": "3",
+      "note": "1 Sun, 1 Thu, 1 Fri"
+    },
+    {
+      "id": "garlic",
+      "store": "grocery",
+      "aisle": "Produce",
+      "name": "Garlic",
+      "qty": "2 heads",
+      "note": "Used most nights"
+    },
+    {
+      "id": "white-beans",
+      "store": "grocery",
+      "aisle": "Pantry",
+      "name": "White beans (cannellini)",
+      "qty": "2 x 15 oz cans",
+      "note": ""
+    },
+    {
+      "id": "broth",
+      "store": "grocery",
+      "aisle": "Pantry",
+      "name": "Low-sodium chicken or vegetable broth",
+      "qty": "1 carton (32 oz)",
+      "note": ""
+    },
+    {
+      "id": "tomato-paste",
+      "store": "home",
+      "aisle": "Pantry",
+      "name": "Tomato paste",
+      "qty": "3 tbsp",
+      "note": "Buy a tube if you have none"
+    },
+    {
+      "id": "smoked-paprika",
+      "store": "home",
+      "aisle": "Pantry",
+      "name": "Smoked paprika",
+      "qty": "1 tsp",
+      "note": ""
+    },
+    {
+      "id": "eggs",
+      "store": "club",
+      "aisle": "Dairy & eggs",
+      "name": "Eggs",
+      "qty": "1 dozen (or 18-count)",
+      "note": "2 Sun, 1 Tue"
+    },
+    {
+      "id": "cucumbers",
+      "store": "grocery",
+      "aisle": "Produce",
+      "name": "Cucumbers",
+      "qty": "2",
+      "note": ""
+    },
+    {
+      "id": "radishes",
+      "store": "grocery",
+      "aisle": "Produce",
+      "name": "Radishes",
+      "qty": "1 bunch",
+      "note": ""
+    },
+    {
+      "id": "lemons",
+      "store": "club",
+      "aisle": "Produce",
+      "name": "Lemons",
+      "qty": "4",
+      "note": "1 Sun, 2 Mon, 1 Fri"
+    },
+    {
+      "id": "olive-oil",
+      "store": "home",
+      "aisle": "Pantry",
+      "name": "Olive oil",
+      "qty": "",
+      "note": ""
+    },
+    {
+      "id": "chicken-thighs",
+      "store": "club",
+      "aisle": "Meat & fish",
+      "name": "Chicken thighs, boneless and skinless",
+      "qty": "8 (about 2 lb)",
+      "note": "4 for dinner, 4 for Tuesday's lunch"
+    },
+    {
+      "id": "oregano",
+      "store": "home",
+      "aisle": "Pantry",
+      "name": "Dried oregano",
+      "qty": "1 tsp",
+      "note": ""
+    },
+    {
+      "id": "dijon",
+      "store": "home",
+      "aisle": "Pantry",
+      "name": "Dijon mustard",
+      "qty": "1 tbsp",
+      "note": ""
+    },
+    {
+      "id": "broccoli",
+      "store": "club",
+      "aisle": "Produce",
+      "name": "Broccoli florets",
+      "qty": "about 1 1/2 lb",
+      "note": "Side for Monday"
+    },
+    {
+      "id": "chili-flakes",
+      "store": "home",
+      "aisle": "Pantry",
+      "name": "Chili flakes",
+      "qty": "a pinch",
+      "note": ""
+    },
+    {
+      "id": "ground-turkey",
+      "store": "club",
+      "aisle": "Meat & fish",
+      "name": "Ground turkey",
+      "qty": "1 1/2 lb",
+      "note": "Half is packed for Wednesday's lunch"
+    },
+    {
+      "id": "zucchini",
+      "store": "club",
+      "aisle": "Produce",
+      "name": "Zucchini",
+      "qty": "2 medium",
+      "note": "Grated into the meatballs"
+    },
+    {
+      "id": "oats",
+      "store": "grocery",
+      "aisle": "Pantry",
+      "name": "Rolled oats (certified gluten-free)",
+      "qty": "1/2 cup",
+      "note": "Check the label"
+    },
+    {
+      "id": "crushed-tomatoes",
+      "store": "grocery",
+      "aisle": "Pantry",
+      "name": "Crushed tomatoes",
+      "qty": "2 x 28 oz cans",
+      "note": "1 Tue, 1 Fri"
+    },
+    {
+      "id": "basil",
+      "store": "grocery",
+      "aisle": "Produce",
+      "name": "Fresh basil",
+      "qty": "1 bunch",
+      "note": ""
+    },
+    {
+      "id": "parmesan",
+      "store": "club",
+      "aisle": "Dairy & eggs",
+      "name": "Parmesan wedge",
+      "qty": "about 4 oz used",
+      "note": "Meatballs, pasta and the Friday salad"
+    },
+    {
+      "id": "cauliflower-rice",
+      "store": "club",
+      "aisle": "Frozen",
+      "name": "Cauliflower rice, frozen",
+      "qty": "2 x 12 oz bags",
+      "note": "Side for Tuesday"
+    },
+    {
+      "id": "tofu",
+      "store": "club",
+      "aisle": "Chilled",
+      "name": "Tofu, extra-firm",
+      "qty": "2 blocks (about 28 oz)",
+      "note": "Keeps unopened for weeks"
+    },
+    {
+      "id": "peanut-butter",
+      "store": "grocery",
+      "aisle": "Pantry",
+      "name": "Natural peanut butter",
+      "qty": "1/4 cup",
+      "note": "Skip if you have some"
+    },
+    {
+      "id": "limes",
+      "store": "club",
+      "aisle": "Produce",
+      "name": "Limes",
+      "qty": "4",
+      "note": "2 Wed, 2 Thu"
+    },
+    {
+      "id": "tamari",
+      "store": "grocery",
+      "aisle": "Pantry",
+      "name": "Tamari (gluten-free soy sauce)",
+      "qty": "1 small bottle",
+      "note": "Check the label"
+    },
+    {
+      "id": "ginger",
+      "store": "grocery",
+      "aisle": "Produce",
+      "name": "Fresh ginger",
+      "qty": "1 small piece",
+      "note": ""
+    },
+    {
+      "id": "cornstarch",
+      "store": "home",
+      "aisle": "Pantry",
+      "name": "Cornstarch",
+      "qty": "1 tbsp",
+      "note": ""
+    },
+    {
+      "id": "carrots-fresh",
+      "store": "grocery",
+      "aisle": "Produce",
+      "name": "Carrots, for pickling",
+      "qty": "3",
+      "note": ""
+    },
+    {
+      "id": "rice-vinegar",
+      "store": "grocery",
+      "aisle": "Pantry",
+      "name": "Rice vinegar",
+      "qty": "1 small bottle",
+      "note": ""
+    },
+    {
+      "id": "scallions",
+      "store": "grocery",
+      "aisle": "Produce",
+      "name": "Scallions",
+      "qty": "1 bunch",
+      "note": ""
+    },
+    {
+      "id": "ground-beef",
+      "store": "club",
+      "aisle": "Meat & fish",
+      "name": "Ground beef (85% lean)",
+      "qty": "1 1/2 lb",
+      "note": "Half is packed for Friday's lunch"
+    },
+    {
+      "id": "bell-peppers",
+      "store": "club",
+      "aisle": "Produce",
+      "name": "Bell peppers, mixed",
+      "qty": "3",
+      "note": ""
+    },
+    {
+      "id": "black-beans",
+      "store": "grocery",
+      "aisle": "Pantry",
+      "name": "Black beans",
+      "qty": "1 x 15 oz can",
+      "note": ""
+    },
+    {
+      "id": "cumin",
+      "store": "home",
+      "aisle": "Pantry",
+      "name": "Ground cumin",
+      "qty": "1 tsp",
+      "note": ""
+    },
+    {
+      "id": "avocados",
+      "store": "club",
+      "aisle": "Produce",
+      "name": "Avocados",
+      "qty": "2",
+      "note": "Buy them firm, they ripen by Thursday"
+    },
+    {
+      "id": "red-onion",
+      "store": "grocery",
+      "aisle": "Produce",
+      "name": "Red onion",
+      "qty": "1/2",
+      "note": ""
+    },
+    {
+      "id": "cherry-tomatoes",
+      "store": "grocery",
+      "aisle": "Produce",
+      "name": "Cherry tomatoes",
+      "qty": "1 pint",
+      "note": ""
+    },
+    {
+      "id": "rigatoni",
+      "store": "grocery",
+      "aisle": "Pantry",
+      "name": "Rigatoni",
+      "qty": "8 oz",
+      "note": "Contains wheat"
+    },
+    {
+      "id": "turkey-sausage",
+      "store": "club",
+      "aisle": "Meat & fish",
+      "name": "Turkey sausage links, mild",
+      "qty": "1 lb",
+      "note": ""
+    },
+    {
+      "id": "fennel-seeds",
+      "store": "home",
+      "aisle": "Pantry",
+      "name": "Fennel seeds",
+      "qty": "1/2 tsp",
+      "note": ""
+    },
+    {
+      "id": "arugula",
+      "store": "club",
+      "aisle": "Produce",
+      "name": "Baby arugula",
+      "qty": "1 tub",
+      "note": ""
+    },
+    {
+      "id": "red-wine",
+      "store": "grocery",
+      "aisle": "Wine",
+      "name": "Medium-bodied Italian-style red",
+      "qty": "1 bottle",
+      "note": "Optional pairing for Friday"
+    },
+    {
+      "id": "lunch-containers",
+      "store": "home",
+      "aisle": "Kit",
+      "name": "Lunch containers",
+      "qty": "8",
+      "note": ""
+    }
+  ]
+}

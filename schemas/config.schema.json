@@ -1,0 +1,65 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Household rules",
+  "type": "object",
+  "required": ["schemaVersion", "household", "week", "cooking", "excludedIngredients", "stores", "budget", "favorites"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "type": "integer", "enum": [1] },
+    "household": {
+      "type": "object", "required": ["label", "people"], "additionalProperties": false,
+      "properties": { "label": { "type": "string", "minLength": 1 }, "people": { "type": "integer", "minimum": 1 } }
+    },
+    "week": {
+      "type": "object", "required": ["shopDay", "dinners", "weekendDinner", "weeknightDinners", "fridayStyle", "packedLunchDays"], "additionalProperties": false,
+      "properties": {
+        "shopDay": { "type": "string", "enum": ["sunday", "saturday", "monday"] },
+        "dinners": { "type": "integer", "minimum": 1 },
+        "weekendDinner": { "type": "string", "enum": ["use-up-fridge"] },
+        "weeknightDinners": { "type": "integer", "minimum": 1 },
+        "fridayStyle": { "type": "string", "enum": ["indulgent"] },
+        "packedLunchDays": { "type": "array", "items": { "type": "string", "enum": ["mon", "tue", "wed", "thu", "fri"] } }
+      }
+    },
+    "cooking": {
+      "type": "object", "required": ["weeknightMaxMinutes", "carbBias", "maxWeeknightsWithWheat"], "additionalProperties": false,
+      "properties": {
+        "weeknightMaxMinutes": { "type": "integer", "minimum": 10 },
+        "carbBias": { "type": "string", "enum": ["lower", "neutral"] },
+        "maxWeeknightsWithWheat": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "excludedIngredients": { "type": "array", "items": { "type": "string", "minLength": 2 } },
+    "stores": {
+      "type": "array", "minItems": 2,
+      "items": {
+        "type": "object", "required": ["id", "name", "short"], "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" },
+          "name": { "type": "string", "minLength": 1 },
+          "short": { "type": "string", "minLength": 1 },
+          "purchase": { "type": "boolean" }
+        }
+      }
+    },
+    "budget": {
+      "type": "object", "required": ["premiumProteins", "premiumMaxPerWeek", "premiumMaxPerMonth", "freshFishDays"], "additionalProperties": false,
+      "properties": {
+        "premiumProteins": { "type": "array", "items": { "type": "string" } },
+        "premiumMaxPerWeek": { "type": "integer", "minimum": 0 },
+        "premiumMaxPerMonth": { "type": "integer", "minimum": 0 },
+        "freshFishDays": { "type": "array", "items": { "type": "string", "enum": ["mon", "tue", "wed", "thu", "fri"] } }
+      }
+    },
+    "favorites": {
+      "type": "object", "required": ["minGapDays", "maxPicks", "maxPremium", "maxWeekendOnly", "weekendOnlyOverMinutes"], "additionalProperties": false,
+      "properties": {
+        "minGapDays": { "type": "integer", "minimum": 1 },
+        "maxPicks": { "type": "integer", "minimum": 0 },
+        "maxPremium": { "type": "integer", "minimum": 0 },
+        "maxWeekendOnly": { "type": "integer", "minimum": 0 },
+        "weekendOnlyOverMinutes": { "type": "integer", "minimum": 10 }
+      }
+    }
+  }
+}

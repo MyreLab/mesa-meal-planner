@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "favorites": [
+    {
+      "id": "lemon-herb-chicken-with-roasted-broccoli",
+      "dish": "Lemon-herb chicken with roasted broccoli",
+      "short": "Lemon-herb chicken",
+      "protein": "chicken",
+      "slot": "any",
+      "totalMinutes": 35,
+      "premium": false,
+      "lastCooked": "2026-10-12",
+      "note": ""
+    },
+    {
+      "id": "slow-simmered-beef-chili",
+      "dish": "Slow-simmered beef chili",
+      "short": "Beef chili",
+      "protein": "beef",
+      "slot": "weekend",
+      "totalMinutes": 75,
+      "premium": false,
+      "lastCooked": "2026-10-18",
+      "note": "Simmers an hour, so weekend only"
+    },
+    {
+      "id": "pan-seared-steak-with-garlic-green-beans",
+      "dish": "Pan-seared steak with garlic green beans",
+      "short": "Steak & green beans",
+      "protein": "beef",
+      "slot": "any",
+      "totalMinutes": 30,
+      "premium": true,
+      "lastCooked": "2026-10-20",
+      "note": "Premium protein"
+    },
+    {
+      "id": "baked-salmon-with-quick-cucumber-salad",
+      "dish": "Baked salmon with quick cucumber salad",
+      "short": "Baked salmon",
+      "protein": "fish",
+      "slot": "any",
+      "totalMinutes": 25,
+      "premium": true,
+      "lastCooked": "2026-10-27",
+      "note": "Fresh fish, cook early in the week"
+    },
+    {
+      "id": "turkey-meatballs-with-zucchini-noodles",
+      "dish": "Turkey meatballs with zucchini noodles",
+      "short": "Turkey meatballs",
+      "protein": "turkey",
+      "slot": "any",
+      "totalMinutes": 35,
+      "premium": false,
+      "lastCooked": "2026-10-29",
+      "note": ""
+    },
+    {
+      "id": "crispy-tofu-stir-fry",
+      "dish": "Crispy tofu stir-fry",
+      "short": "Tofu stir-fry",
+      "protein": "tofu",
+      "slot": "any",
+      "totalMinutes": 30,
+      "premium": false,
+      "lastCooked": "2026-11-02",
+      "note": ""
+    },
+    {
+      "id": "baked-eggs-in-spicy-tomato",
+      "dish": "Baked eggs in spicy tomato",
+      "short": "Baked eggs",
+      "protein": "egg",
+      "slot": "any",
+      "totalMinutes": 30,
+      "premium": false,
+      "lastCooked": "2026-11-08",
+      "note": ""
+    },
+    {
+      "id": "white-bean-and-chicken-stew",
+      "dish": "White bean and chicken stew",
+      "short": "Bean & chicken stew",
+      "protein": "chicken",
+      "slot": "weekend",
+      "totalMinutes": 90,
+      "premium": false,
+      "lastCooked": "2026-11-01",
+      "note": "Long simmer, weekend only"
+    }
+  ]
+}

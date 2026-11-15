@@ -1,0 +1,884 @@
+{
+  "schemaVersion": 1,
+  "week": "2026-11-09",
+  "shopDay": "2026-11-08",
+  "title": "Week of Nov 9",
+  "summary": "Six dinners, each with a side: a weekend roast, fish early in the week, a no-cook tinned-fish night and crispy chicken to finish. Three packed lunches from leftovers.",
+  "meta": {
+    "source": "sample-data",
+    "playbook": "docs/PLAYBOOK.md",
+    "createdOn": "2026-11-06"
+  },
+  "lunches": {
+    "wknd": null,
+    "mon": "wknd",
+    "tue": null,
+    "wed": "tue",
+    "thu": null,
+    "fri": "thu"
+  },
+  "days": [
+    {
+      "key": "wknd",
+      "date": "2026-11-08",
+      "dish": "Slow-roasted chicken legs with carrots and parsnips",
+      "short": "Roast chicken",
+      "origin": "Sunday roast",
+      "protein": "chicken",
+      "proteinLabel": "Chicken legs",
+      "wheat": "free",
+      "minutes": {
+        "hands": 15,
+        "total": 75
+      },
+      "portions": 4,
+      "feeds": "Dinner + Mon lunch",
+      "headsUp": "Uses up the carrots and thyme from the fridge. The long roast is why this is a weekend dish. Pack half for Monday's lunch.",
+      "ingredients": [
+        {
+          "item": "chicken-legs",
+          "qty": "3 lb",
+          "text": "chicken drumsticks and thighs"
+        },
+        {
+          "item": "carrots",
+          "qty": "3",
+          "text": "carrots, cut in chunks"
+        },
+        {
+          "item": "parsnips",
+          "qty": "2",
+          "text": "parsnips, cut in chunks"
+        },
+        {
+          "item": "onions",
+          "qty": "2",
+          "text": "onions, in wedges"
+        },
+        {
+          "item": "thyme",
+          "qty": "6 sprigs",
+          "text": "thyme"
+        },
+        {
+          "item": "garlic",
+          "qty": "1 head",
+          "text": "garlic, halved across"
+        },
+        {
+          "item": "lemons",
+          "qty": "1",
+          "text": "lemon, halved"
+        },
+        {
+          "item": "olive-oil",
+          "qty": "3 tbsp",
+          "text": "olive oil"
+        }
+      ],
+      "steps": [
+        "Heat the oven to 375F. Toss the vegetables with half the oil, the thyme and salt on a large tray, tucking in the garlic halves.",
+        "Rub the chicken with the remaining oil, salt and pepper and nestle it on top of the vegetables.",
+        "Roast for 60 minutes, until the skin is deep golden and the vegetables are tender.",
+        "Squeeze the roasted lemon over everything and rest for 10 minutes. Pack half for Monday."
+      ],
+      "side": {
+        "name": "Garlicky wilted spinach",
+        "ingredients": [
+          {
+            "item": "spinach",
+            "qty": "10 oz",
+            "text": "baby spinach"
+          },
+          {
+            "item": "garlic",
+            "qty": "2 cloves",
+            "text": "garlic, sliced"
+          },
+          {
+            "item": "olive-oil",
+            "qty": "1 tbsp",
+            "text": "olive oil"
+          }
+        ],
+        "steps": [
+          "Warm the oil with the garlic for 30 seconds, add the spinach by the handful and toss until just wilted, about 2 minutes. Season with salt."
+        ]
+      },
+      "source": {
+        "label": "Original sample recipe",
+        "url": ""
+      },
+      "premium": false,
+      "notes": [],
+      "wheatNote": "",
+      "pairing": null
+    },
+    {
+      "key": "mon",
+      "date": "2026-11-09",
+      "dish": "Lemon-dill salmon traybake",
+      "short": "Salmon",
+      "origin": "Early-week fish",
+      "protein": "fish",
+      "proteinLabel": "Fresh salmon",
+      "wheat": "free",
+      "premium": true,
+      "minutes": {
+        "hands": 10,
+        "total": 25
+      },
+      "portions": 2,
+      "feeds": "Dinner for two",
+      "headsUp": "Fresh fish goes first in the week. A premium protein, so it appears only once or twice a month.",
+      "ingredients": [
+        {
+          "item": "salmon",
+          "qty": "2 fillets",
+          "text": "fresh salmon fillets"
+        },
+        {
+          "item": "lemons",
+          "qty": "2",
+          "text": "lemons, 1 sliced and 1 juiced"
+        },
+        {
+          "item": "dill",
+          "qty": "1/2 bunch",
+          "text": "dill, chopped"
+        },
+        {
+          "item": "dijon",
+          "qty": "1 tbsp",
+          "text": "Dijon mustard"
+        },
+        {
+          "item": "olive-oil",
+          "qty": "2 tbsp",
+          "text": "olive oil"
+        }
+      ],
+      "steps": [
+        "Heat the oven to 400F. Lay the salmon skin-side down on a lined tray with the lemon slices underneath.",
+        "Whisk the mustard, oil, lemon juice and half the dill, then brush it over the fish. Season with salt and pepper.",
+        "Roast 12 to 14 minutes, until the fish flakes at the thickest part.",
+        "Scatter over the rest of the dill."
+      ],
+      "side": {
+        "name": "Blistered green beans with garlic",
+        "ingredients": [
+          {
+            "item": "green-beans",
+            "qty": "12 oz",
+            "text": "green beans, trimmed"
+          },
+          {
+            "item": "garlic",
+            "qty": "2 cloves",
+            "text": "garlic, sliced"
+          },
+          {
+            "item": "olive-oil",
+            "qty": "1 tbsp",
+            "text": "olive oil"
+          }
+        ],
+        "steps": [
+          "Cook the beans in a hot dry skillet for 5 minutes until blistered, add the oil and garlic for 1 minute, and season with salt."
+        ]
+      },
+      "source": {
+        "label": "Original sample recipe",
+        "url": ""
+      },
+      "notes": [],
+      "wheatNote": "",
+      "pairing": null
+    },
+    {
+      "key": "tue",
+      "date": "2026-11-10",
+      "dish": "Ground beef and cabbage skillet",
+      "short": "Beef cabbage",
+      "origin": "Stir-fry style",
+      "protein": "beef",
+      "proteinLabel": "Ground beef",
+      "wheat": "check",
+      "wheatNote": "Tamari is usually wheat-free, but check the label.",
+      "minutes": {
+        "hands": 10,
+        "total": 25
+      },
+      "portions": 4,
+      "feeds": "Dinner + Wed lunch",
+      "headsUp": "Cabbage stands in for rice here. Pack half for Wednesday.",
+      "ingredients": [
+        {
+          "item": "ground-beef",
+          "qty": "1 1/2 lb",
+          "text": "ground beef"
+        },
+        {
+          "item": "green-cabbage",
+          "qty": "1/2 head",
+          "text": "green cabbage, thinly sliced"
+        },
+        {
+          "item": "onions",
+          "qty": "1",
+          "text": "onion, sliced"
+        },
+        {
+          "item": "garlic",
+          "qty": "3 cloves",
+          "text": "garlic, minced"
+        },
+        {
+          "item": "ginger",
+          "qty": "1 tbsp",
+          "text": "fresh ginger, grated"
+        },
+        {
+          "item": "tamari",
+          "qty": "3 tbsp",
+          "text": "tamari"
+        },
+        {
+          "item": "olive-oil",
+          "qty": "1 tbsp",
+          "text": "oil"
+        }
+      ],
+      "steps": [
+        "Brown the beef in a large skillet over high heat, breaking it up, about 6 minutes.",
+        "Add the onion, garlic and ginger and cook 3 minutes.",
+        "Add the cabbage and tamari and stir-fry 6 to 8 minutes, until the cabbage is tender but still has some bite.",
+        "Taste, add pepper and more tamari if needed. Pack half for Wednesday."
+      ],
+      "side": {
+        "name": "Quick-pickled cucumbers",
+        "ingredients": [
+          {
+            "item": "cucumbers",
+            "qty": "2",
+            "text": "cucumbers, sliced"
+          },
+          {
+            "item": "rice-vinegar",
+            "qty": "3 tbsp",
+            "text": "rice vinegar"
+          }
+        ],
+        "steps": [
+          "Toss the cucumbers with the vinegar and a pinch of salt and leave them while the beef cooks."
+        ]
+      },
+      "source": {
+        "label": "Original sample recipe",
+        "url": ""
+      },
+      "premium": false,
+      "notes": [],
+      "pairing": null
+    },
+    {
+      "key": "wed",
+      "date": "2026-11-11",
+      "dish": "Shakshuka-style baked eggs",
+      "short": "Baked eggs",
+      "origin": "North African-inspired",
+      "protein": "egg",
+      "proteinLabel": "Eggs",
+      "wheat": "free",
+      "minutes": {
+        "hands": 10,
+        "total": 30
+      },
+      "portions": 2,
+      "feeds": "Dinner for two",
+      "headsUp": "Eggs do not reheat well, so there is no packed lunch from this one.",
+      "ingredients": [
+        {
+          "item": "eggs",
+          "qty": "6",
+          "text": "eggs"
+        },
+        {
+          "item": "bell-peppers",
+          "qty": "2",
+          "text": "bell peppers, sliced"
+        },
+        {
+          "item": "onions",
+          "qty": "1",
+          "text": "onion, sliced"
+        },
+        {
+          "item": "garlic",
+          "qty": "2 cloves",
+          "text": "garlic, minced"
+        },
+        {
+          "item": "crushed-tomatoes",
+          "qty": "1 can",
+          "text": "crushed tomatoes (28 oz)"
+        },
+        {
+          "item": "cumin",
+          "qty": "1 tsp",
+          "text": "ground cumin"
+        },
+        {
+          "item": "smoked-paprika",
+          "qty": "1 tsp",
+          "text": "smoked paprika"
+        },
+        {
+          "item": "feta",
+          "qty": "4 oz",
+          "text": "feta, crumbled"
+        },
+        {
+          "item": "olive-oil",
+          "qty": "2 tbsp",
+          "text": "olive oil"
+        }
+      ],
+      "steps": [
+        "Soften the onion and peppers in the oil in a wide skillet for 8 minutes.",
+        "Add the garlic, cumin and paprika, then the tomatoes. Simmer 10 minutes until thick.",
+        "Make six wells, crack in the eggs, cover and cook 5 to 7 minutes, until the whites are set.",
+        "Top with the feta."
+      ],
+      "side": {
+        "name": "Charred zucchini with lemon",
+        "ingredients": [
+          {
+            "item": "zucchini",
+            "qty": "2",
+            "text": "zucchini, cut in planks"
+          },
+          {
+            "item": "lemons",
+            "qty": "1",
+            "text": "lemon, juiced"
+          },
+          {
+            "item": "olive-oil",
+            "qty": "1 tbsp",
+            "text": "olive oil"
+          }
+        ],
+        "steps": [
+          "Grill or pan-sear the zucchini over high heat, 3 minutes a side, until charred. Dress with the lemon juice, oil and salt."
+        ]
+      },
+      "source": {
+        "label": "Original sample recipe",
+        "url": ""
+      },
+      "premium": false,
+      "notes": [],
+      "wheatNote": "",
+      "pairing": null
+    },
+    {
+      "key": "thu",
+      "date": "2026-11-12",
+      "dish": "Tuna and white bean salad",
+      "short": "Tuna salad",
+      "origin": "No-cook dinner",
+      "protein": "fish",
+      "proteinLabel": "Tinned tuna",
+      "wheat": "free",
+      "minutes": {
+        "hands": 15,
+        "total": 25
+      },
+      "portions": 4,
+      "feeds": "Dinner + Fri lunch",
+      "headsUp": "Tinned fish keeps the budget down. The salad improves overnight, so pack half for Friday.",
+      "ingredients": [
+        {
+          "item": "tinned-tuna",
+          "qty": "4 tins",
+          "text": "tuna in olive oil, drained"
+        },
+        {
+          "item": "white-beans",
+          "qty": "2 cans",
+          "text": "white beans, drained"
+        },
+        {
+          "item": "red-onion",
+          "qty": "1/2",
+          "text": "red onion, thinly sliced"
+        },
+        {
+          "item": "lemons",
+          "qty": "2",
+          "text": "lemons, juiced"
+        },
+        {
+          "item": "parsley",
+          "qty": "1 bunch",
+          "text": "parsley, chopped"
+        },
+        {
+          "item": "dijon",
+          "qty": "1 tsp",
+          "text": "Dijon mustard"
+        },
+        {
+          "item": "olive-oil",
+          "qty": "3 tbsp",
+          "text": "olive oil"
+        }
+      ],
+      "steps": [
+        "Whisk the lemon juice, mustard, oil, salt and pepper in a large bowl.",
+        "Add the red onion and let it sit for 5 minutes to soften.",
+        "Fold in the beans, tuna and parsley, breaking the tuna into large flakes.",
+        "Pack half for Friday."
+      ],
+      "side": {
+        "name": "Garlic-roasted broccoli",
+        "ingredients": [
+          {
+            "item": "broccoli",
+            "qty": "1 1/2 lb",
+            "text": "broccoli florets"
+          },
+          {
+            "item": "garlic",
+            "qty": "3 cloves",
+            "text": "garlic, sliced"
+          },
+          {
+            "item": "olive-oil",
+            "qty": "2 tbsp",
+            "text": "olive oil"
+          }
+        ],
+        "steps": [
+          "Toss the broccoli with the garlic, oil and salt and roast at 425F for 20 minutes, until the edges brown."
+        ]
+      },
+      "source": {
+        "label": "Original sample recipe",
+        "url": ""
+      },
+      "premium": false,
+      "notes": [],
+      "wheatNote": "",
+      "pairing": null
+    },
+    {
+      "key": "fri",
+      "date": "2026-11-13",
+      "dish": "Crispy chicken sandwiches with pickles",
+      "short": "Chicken bun",
+      "origin": "Comfort-food night",
+      "protein": "chicken",
+      "proteinLabel": "Chicken breasts",
+      "wheat": "contains",
+      "wheatNote": "Panko and brioche buns contain wheat. Friday is the indulgent night.",
+      "minutes": {
+        "hands": 20,
+        "total": 35
+      },
+      "portions": 2,
+      "feeds": "Dinner for two",
+      "headsUp": "Slice each breast in half horizontally so the cutlets cook fast and stay crisp.",
+      "ingredients": [
+        {
+          "item": "chicken-breasts",
+          "qty": "2",
+          "text": "chicken breasts, sliced into 4 cutlets"
+        },
+        {
+          "item": "panko",
+          "qty": "1 cup",
+          "text": "panko breadcrumbs"
+        },
+        {
+          "item": "eggs",
+          "qty": "1",
+          "text": "egg, beaten"
+        },
+        {
+          "item": "buns",
+          "qty": "2",
+          "text": "brioche buns"
+        },
+        {
+          "item": "mayo",
+          "qty": "2 tbsp",
+          "text": "mayonnaise"
+        },
+        {
+          "item": "pickles",
+          "qty": "6 slices",
+          "text": "dill pickle slices"
+        },
+        {
+          "item": "olive-oil",
+          "qty": "3 tbsp",
+          "text": "oil, for frying"
+        }
+      ],
+      "steps": [
+        "Season the cutlets with salt and pepper, dip in the egg, then press into the panko.",
+        "Fry in the oil over medium heat for 4 minutes a side, until deep golden and cooked through.",
+        "Toast the buns, spread with mayonnaise and build with the cutlets and pickles."
+      ],
+      "side": {
+        "name": "Crunchy cabbage slaw with lime",
+        "ingredients": [
+          {
+            "item": "green-cabbage",
+            "qty": "1/4 head",
+            "text": "green cabbage, shredded"
+          },
+          {
+            "item": "limes",
+            "qty": "2",
+            "text": "limes, juiced"
+          },
+          {
+            "item": "mayo",
+            "qty": "1 tbsp",
+            "text": "mayonnaise"
+          }
+        ],
+        "steps": [
+          "Toss the cabbage with the lime juice, mayonnaise and a pinch of salt. Chill until the sandwiches are ready."
+        ]
+      },
+      "pairing": {
+        "item": "sparkling-wine",
+        "text": "A dry sparkling wine cuts through the fried coating. Optional."
+      },
+      "source": {
+        "label": "Original sample recipe",
+        "url": ""
+      },
+      "premium": false,
+      "notes": []
+    }
+  ],
+  "items": [
+    {
+      "id": "chicken-legs",
+      "store": "club",
+      "aisle": "Meat & fish",
+      "name": "Chicken drumsticks and thighs, bone-in",
+      "qty": "about 3 lb",
+      "note": "Weekend roast, leftovers feed Monday's lunch"
+    },
+    {
+      "id": "carrots",
+      "store": "home",
+      "aisle": "In the fridge",
+      "name": "Carrots",
+      "qty": "3",
+      "note": "Use them up on Sunday"
+    },
+    {
+      "id": "thyme",
+      "store": "home",
+      "aisle": "In the fridge",
+      "name": "Fresh thyme",
+      "qty": "6 sprigs",
+      "note": "Use it up on Sunday"
+    },
+    {
+      "id": "spinach",
+      "store": "home",
+      "aisle": "In the fridge",
+      "name": "Baby spinach",
+      "qty": "10 oz",
+      "note": "Use it up on Sunday"
+    },
+    {
+      "id": "parsnips",
+      "store": "grocery",
+      "aisle": "Produce",
+      "name": "Parsnips",
+      "qty": "2",
+      "note": ""
+    },
+    {
+      "id": "onions",
+      "store": "home",
+      "aisle": "Pantry",
+      "name": "Onions",
+      "qty": "3",
+      "note": "2 Sun, 1 Tue"
+    },
+    {
+      "id": "garlic",
+      "store": "grocery",
+      "aisle": "Produce",
+      "name": "Garlic",
+      "qty": "2 heads",
+      "note": ""
+    },
+    {
+      "id": "lemons",
+      "store": "club",
+      "aisle": "Produce",
+      "name": "Lemons",
+      "qty": "5",
+      "note": "1 Sun, 2 Mon, 2 Thu"
+    },
+    {
+      "id": "olive-oil",
+      "store": "home",
+      "aisle": "Pantry",
+      "name": "Olive oil",
+      "qty": "",
+      "note": ""
+    },
+    {
+      "id": "salmon",
+      "store": "grocery",
+      "aisle": "Meat & fish",
+      "name": "Fresh salmon fillets, skin-on",
+      "qty": "2 x 6 oz",
+      "note": "Cook it Monday, fresh fish goes first"
+    },
+    {
+      "id": "dill",
+      "store": "grocery",
+      "aisle": "Produce",
+      "name": "Fresh dill",
+      "qty": "1 bunch",
+      "note": ""
+    },
+    {
+      "id": "green-beans",
+      "store": "club",
+      "aisle": "Produce",
+      "name": "Green beans",
+      "qty": "12 oz",
+      "note": "Side for Monday"
+    },
+    {
+      "id": "dijon",
+      "store": "home",
+      "aisle": "Pantry",
+      "name": "Dijon mustard",
+      "qty": "1 tbsp",
+      "note": ""
+    },
+    {
+      "id": "ground-beef",
+      "store": "club",
+      "aisle": "Meat & fish",
+      "name": "Ground beef (85% lean)",
+      "qty": "1 1/2 lb",
+      "note": "Half is packed for Wednesday's lunch"
+    },
+    {
+      "id": "green-cabbage",
+      "store": "club",
+      "aisle": "Produce",
+      "name": "Green cabbage",
+      "qty": "1 small head",
+      "note": "1/2 Tue, 1/4 Fri"
+    },
+    {
+      "id": "tamari",
+      "store": "grocery",
+      "aisle": "Pantry",
+      "name": "Tamari (gluten-free soy sauce)",
+      "qty": "1 small bottle",
+      "note": "Check the label"
+    },
+    {
+      "id": "rice-vinegar",
+      "store": "grocery",
+      "aisle": "Pantry",
+      "name": "Rice vinegar",
+      "qty": "1 small bottle",
+      "note": ""
+    },
+    {
+      "id": "cucumbers",
+      "store": "grocery",
+      "aisle": "Produce",
+      "name": "Cucumbers",
+      "qty": "2",
+      "note": ""
+    },
+    {
+      "id": "ginger",
+      "store": "grocery",
+      "aisle": "Produce",
+      "name": "Fresh ginger",
+      "qty": "1 small piece",
+      "note": ""
+    },
+    {
+      "id": "eggs",
+      "store": "club",
+      "aisle": "Dairy & eggs",
+      "name": "Eggs",
+      "qty": "1 dozen (or 18-count)",
+      "note": "6 Wed, 1 Fri"
+    },
+    {
+      "id": "bell-peppers",
+      "store": "club",
+      "aisle": "Produce",
+      "name": "Bell peppers, mixed",
+      "qty": "3-pack",
+      "note": ""
+    },
+    {
+      "id": "crushed-tomatoes",
+      "store": "grocery",
+      "aisle": "Pantry",
+      "name": "Crushed tomatoes",
+      "qty": "1 x 28 oz can",
+      "note": ""
+    },
+    {
+      "id": "cumin",
+      "store": "home",
+      "aisle": "Pantry",
+      "name": "Ground cumin",
+      "qty": "1 tsp",
+      "note": ""
+    },
+    {
+      "id": "smoked-paprika",
+      "store": "home",
+      "aisle": "Pantry",
+      "name": "Smoked paprika",
+      "qty": "1 tsp",
+      "note": ""
+    },
+    {
+      "id": "feta",
+      "store": "grocery",
+      "aisle": "Dairy & eggs",
+      "name": "Feta",
+      "qty": "4 oz",
+      "note": ""
+    },
+    {
+      "id": "zucchini",
+      "store": "club",
+      "aisle": "Produce",
+      "name": "Zucchini",
+      "qty": "2 medium",
+      "note": ""
+    },
+    {
+      "id": "tinned-tuna",
+      "store": "club",
+      "aisle": "Pantry",
+      "name": "Tuna in olive oil, tinned",
+      "qty": "4 x 5 oz",
+      "note": ""
+    },
+    {
+      "id": "white-beans",
+      "store": "grocery",
+      "aisle": "Pantry",
+      "name": "White beans (cannellini)",
+      "qty": "2 x 15 oz cans",
+      "note": ""
+    },
+    {
+      "id": "red-onion",
+      "store": "grocery",
+      "aisle": "Produce",
+      "name": "Red onion",
+      "qty": "1/2",
+      "note": ""
+    },
+    {
+      "id": "parsley",
+      "store": "grocery",
+      "aisle": "Produce",
+      "name": "Flat-leaf parsley",
+      "qty": "1 bunch",
+      "note": ""
+    },
+    {
+      "id": "broccoli",
+      "store": "club",
+      "aisle": "Produce",
+      "name": "Broccoli florets",
+      "qty": "about 1 1/2 lb",
+      "note": "Side for Thursday"
+    },
+    {
+      "id": "chicken-breasts",
+      "store": "club",
+      "aisle": "Meat & fish",
+      "name": "Chicken breasts, boneless and skinless",
+      "qty": "2 (about 1 lb)",
+      "note": ""
+    },
+    {
+      "id": "panko",
+      "store": "grocery",
+      "aisle": "Pantry",
+      "name": "Panko breadcrumbs",
+      "qty": "1 cup",
+      "note": "Contains wheat"
+    },
+    {
+      "id": "buns",
+      "store": "grocery",
+      "aisle": "Bakery",
+      "name": "Brioche buns",
+      "qty": "2",
+      "note": "Contains wheat"
+    },
+    {
+      "id": "mayo",
+      "store": "grocery",
+      "aisle": "Pantry",
+      "name": "Mayonnaise",
+      "qty": "1 small jar",
+      "note": "Skip if you have some"
+    },
+    {
+      "id": "pickles",
+      "store": "grocery",
+      "aisle": "Pantry",
+      "name": "Dill pickle slices",
+      "qty": "1 jar",
+      "note": ""
+    },
+    {
+      "id": "limes",
+      "store": "club",
+      "aisle": "Produce",
+      "name": "Limes",
+      "qty": "2",
+      "note": ""
+    },
+    {
+      "id": "sparkling-wine",
+      "store": "grocery",
+      "aisle": "Wine",
+      "name": "Dry sparkling wine",
+      "qty": "1 bottle",
+      "note": "Optional pairing for Friday"
+    },
+    {
+      "id": "lunch-containers",
+      "store": "home",
+      "aisle": "Kit",
+      "name": "Lunch containers",
+      "qty": "6",
+      "note": ""
+    }
+  ]
+}

@@ -1,0 +1,445 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "One planned week (written by the weekly planning run)",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "week",
+    "shopDay",
+    "title",
+    "summary",
+    "meta",
+    "lunches",
+    "days",
+    "items"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "type": "integer",
+      "enum": [
+        1
+      ]
+    },
+    "week": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "shopDay": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "meta": {
+      "type": "object",
+      "required": [
+        "source",
+        "playbook",
+        "createdOn"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "source": {
+          "type": "string"
+        },
+        "playbook": {
+          "type": "string"
+        },
+        "createdOn": {
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        }
+      }
+    },
+    "lunches": {
+      "type": "object",
+      "required": [
+        "wknd",
+        "mon",
+        "tue",
+        "wed",
+        "thu",
+        "fri"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "wknd": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "wknd",
+            "mon",
+            "tue",
+            "wed",
+            "thu",
+            "fri",
+            null
+          ]
+        },
+        "mon": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "wknd",
+            "mon",
+            "tue",
+            "wed",
+            "thu",
+            "fri",
+            null
+          ]
+        },
+        "tue": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "wknd",
+            "mon",
+            "tue",
+            "wed",
+            "thu",
+            "fri",
+            null
+          ]
+        },
+        "wed": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "wknd",
+            "mon",
+            "tue",
+            "wed",
+            "thu",
+            "fri",
+            null
+          ]
+        },
+        "thu": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "wknd",
+            "mon",
+            "tue",
+            "wed",
+            "thu",
+            "fri",
+            null
+          ]
+        },
+        "fri": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "wknd",
+            "mon",
+            "tue",
+            "wed",
+            "thu",
+            "fri",
+            null
+          ]
+        }
+      }
+    },
+    "days": {
+      "type": "array",
+      "minItems": 6,
+      "items": {
+        "type": "object",
+        "required": [
+          "key",
+          "date",
+          "dish",
+          "short",
+          "origin",
+          "protein",
+          "proteinLabel",
+          "wheat",
+          "wheatNote",
+          "minutes",
+          "portions",
+          "feeds",
+          "premium",
+          "headsUp",
+          "ingredients",
+          "steps",
+          "side",
+          "source",
+          "notes",
+          "pairing"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "key": {
+            "type": "string",
+            "enum": [
+              "wknd",
+              "mon",
+              "tue",
+              "wed",
+              "thu",
+              "fri"
+            ]
+          },
+          "date": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+          },
+          "dish": {
+            "type": "string",
+            "minLength": 1
+          },
+          "short": {
+            "type": "string",
+            "minLength": 1
+          },
+          "origin": {
+            "type": "string"
+          },
+          "protein": {
+            "type": "string",
+            "enum": [
+              "chicken",
+              "fish",
+              "beef",
+              "turkey",
+              "egg",
+              "tofu",
+              "beans"
+            ]
+          },
+          "proteinLabel": {
+            "type": "string",
+            "minLength": 1
+          },
+          "wheat": {
+            "type": "string",
+            "enum": [
+              "free",
+              "check",
+              "contains"
+            ]
+          },
+          "wheatNote": {
+            "type": "string"
+          },
+          "minutes": {
+            "type": "object",
+            "required": [
+              "hands",
+              "total"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "hands": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "total": {
+                "type": "integer",
+                "minimum": 1
+              }
+            }
+          },
+          "portions": {
+            "type": "integer",
+            "minimum": 2
+          },
+          "feeds": {
+            "type": "string"
+          },
+          "premium": {
+            "type": "boolean"
+          },
+          "headsUp": {
+            "type": "string"
+          },
+          "ingredients": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": [
+                "item",
+                "qty",
+                "text"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "item": {
+                  "type": "string",
+                  "pattern": "^[a-z0-9][a-z0-9-]*$"
+                },
+                "qty": {
+                  "type": "string"
+                },
+                "text": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          },
+          "steps": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "side": {
+            "type": "object",
+            "required": [
+              "name",
+              "ingredients",
+              "steps"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1
+              },
+              "ingredients": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "item",
+                    "qty",
+                    "text"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "item": {
+                      "type": "string",
+                      "pattern": "^[a-z0-9][a-z0-9-]*$"
+                    },
+                    "qty": {
+                      "type": "string"
+                    },
+                    "text": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  }
+                }
+              },
+              "steps": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          },
+          "source": {
+            "type": "object",
+            "required": [
+              "label",
+              "url"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "label": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              }
+            }
+          },
+          "notes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "pairing": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "required": [
+              "item",
+              "text"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "item": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "items": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "store",
+          "aisle",
+          "name",
+          "qty",
+          "note"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]*$"
+          },
+          "store": {
+            "type": "string"
+          },
+          "aisle": {
+            "type": "string",
+            "minLength": 1
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "qty": {
+            "type": "string"
+          },
+          "note": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "household": {
+    "label": "Sample household",
+    "people": 2
+  },
+  "week": {
+    "shopDay": "sunday",
+    "dinners": 6,
+    "weekendDinner": "use-up-fridge",
+    "weeknightDinners": 5,
+    "fridayStyle": "indulgent",
+    "packedLunchDays": [
+      "tue",
+      "wed",
+      "thu",
+      "fri"
+    ]
+  },
+  "cooking": {
+    "weeknightMaxMinutes": 40,
+    "carbBias": "lower",
+    "maxWeeknightsWithWheat": 1
+  },
+  "excludedIngredients": [
+    "mushrooms",
+    "olives",
+    "cilantro"
+  ],
+  "stores": [
+    {
+      "id": "club",
+      "name": "Warehouse club",
+      "short": "WH"
+    },
+    {
+      "id": "grocery",
+      "name": "Grocery",
+      "short": "GR"
+    },
+    {
+      "id": "home",
+      "name": "Have it",
+      "short": "home",
+      "purchase": false
+    }
+  ],
+  "budget": {
+    "premiumProteins": [
+      "steak",
+      "fresh salmon"
+    ],
+    "premiumMaxPerWeek": 1,
+    "premiumMaxPerMonth": 2,
+    "freshFishDays": [
+      "mon",
+      "tue"
+    ]
+  },
+  "favorites": {
+    "minGapDays": 28,
+    "maxPicks": 2,
+    "maxPremium": 1,
+    "maxWeekendOnly": 1,
+    "weekendOnlyOverMinutes": 40
+  }
+}
