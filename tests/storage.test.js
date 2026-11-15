@@ -21,7 +21,7 @@ for (const [name, make] of [["memory", () => createMemoryAdapter()], ["localStor
   test(`${name} adapter: list filters by prefix and carries updatedAt`, async () => {
     const store = createStorage(make(), clock());
     await store.set(keys.item("2026-11-16", "garlic"), { c: true, s: null });
-    await store.set(keys.item("2026-11-16", "kale"), { c: false, s: "grocery" });
+    await store.set(keys.item("2026-11-16", "kale"), { c: false, s: "whole-foods" });
     await store.set(keys.item("2026-11-09", "garlic"), { c: true, s: null });
     const rows = await store.list(keys.itemsPrefix("2026-11-16"));
     assert.deepEqual(rows.map((r) => r.key).sort(), ["shops/w-2026-11-16/items/garlic", "shops/w-2026-11-16/items/kale"]);

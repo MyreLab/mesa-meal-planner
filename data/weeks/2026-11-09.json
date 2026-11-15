@@ -570,7 +570,7 @@
   "items": [
     {
       "id": "chicken-legs",
-      "store": "club",
+      "store": "costco",
       "aisle": "Meat & fish",
       "name": "Chicken drumsticks and thighs, bone-in",
       "qty": "about 3 lb",
@@ -602,7 +602,7 @@
     },
     {
       "id": "parsnips",
-      "store": "grocery",
+      "store": "whole-foods",
       "aisle": "Produce",
       "name": "Parsnips",
       "qty": "2",
@@ -618,7 +618,7 @@
     },
     {
       "id": "garlic",
-      "store": "grocery",
+      "store": "whole-foods",
       "aisle": "Produce",
       "name": "Garlic",
       "qty": "2 heads",
@@ -626,7 +626,7 @@
     },
     {
       "id": "lemons",
-      "store": "club",
+      "store": "costco",
       "aisle": "Produce",
       "name": "Lemons",
       "qty": "5",
@@ -642,7 +642,7 @@
     },
     {
       "id": "salmon",
-      "store": "grocery",
+      "store": "whole-foods",
       "aisle": "Meat & fish",
       "name": "Fresh salmon fillets, skin-on",
       "qty": "2 x 6 oz",
@@ -650,7 +650,7 @@
     },
     {
       "id": "dill",
-      "store": "grocery",
+      "store": "whole-foods",
       "aisle": "Produce",
       "name": "Fresh dill",
       "qty": "1 bunch",
@@ -658,7 +658,7 @@
     },
     {
       "id": "green-beans",
-      "store": "club",
+      "store": "costco",
       "aisle": "Produce",
       "name": "Green beans",
       "qty": "12 oz",
@@ -674,7 +674,7 @@
     },
     {
       "id": "ground-beef",
-      "store": "club",
+      "store": "costco",
       "aisle": "Meat & fish",
       "name": "Ground beef (85% lean)",
       "qty": "1 1/2 lb",
@@ -682,7 +682,7 @@
     },
     {
       "id": "green-cabbage",
-      "store": "club",
+      "store": "costco",
       "aisle": "Produce",
       "name": "Green cabbage",
       "qty": "1 small head",
@@ -690,7 +690,7 @@
     },
     {
       "id": "tamari",
-      "store": "grocery",
+      "store": "whole-foods",
       "aisle": "Pantry",
       "name": "Tamari (gluten-free soy sauce)",
       "qty": "1 small bottle",
@@ -698,7 +698,7 @@
     },
     {
       "id": "rice-vinegar",
-      "store": "grocery",
+      "store": "whole-foods",
       "aisle": "Pantry",
       "name": "Rice vinegar",
       "qty": "1 small bottle",
@@ -706,7 +706,7 @@
     },
     {
       "id": "cucumbers",
-      "store": "grocery",
+      "store": "whole-foods",
       "aisle": "Produce",
       "name": "Cucumbers",
       "qty": "2",
@@ -714,7 +714,7 @@
     },
     {
       "id": "ginger",
-      "store": "grocery",
+      "store": "whole-foods",
       "aisle": "Produce",
       "name": "Fresh ginger",
       "qty": "1 small piece",
@@ -722,7 +722,7 @@
     },
     {
       "id": "eggs",
-      "store": "club",
+      "store": "costco",
       "aisle": "Dairy & eggs",
       "name": "Eggs",
       "qty": "1 dozen (or 18-count)",
@@ -730,7 +730,7 @@
     },
     {
       "id": "bell-peppers",
-      "store": "club",
+      "store": "costco",
       "aisle": "Produce",
       "name": "Bell peppers, mixed",
       "qty": "3-pack",
@@ -738,7 +738,7 @@
     },
     {
       "id": "crushed-tomatoes",
-      "store": "grocery",
+      "store": "whole-foods",
       "aisle": "Pantry",
       "name": "Crushed tomatoes",
       "qty": "1 x 28 oz can",
@@ -762,7 +762,7 @@
     },
     {
       "id": "feta",
-      "store": "grocery",
+      "store": "whole-foods",
       "aisle": "Dairy & eggs",
       "name": "Feta",
       "qty": "4 oz",
@@ -770,7 +770,7 @@
     },
     {
       "id": "zucchini",
-      "store": "club",
+      "store": "costco",
       "aisle": "Produce",
       "name": "Zucchini",
       "qty": "2 medium",
@@ -778,7 +778,7 @@
     },
     {
       "id": "tinned-tuna",
-      "store": "club",
+      "store": "costco",
       "aisle": "Pantry",
       "name": "Tuna in olive oil, tinned",
       "qty": "4 x 5 oz",
@@ -786,7 +786,7 @@
     },
     {
       "id": "white-beans",
-      "store": "grocery",
+      "store": "whole-foods",
       "aisle": "Pantry",
       "name": "White beans (cannellini)",
       "qty": "2 x 15 oz cans",
@@ -794,7 +794,7 @@
     },
     {
       "id": "red-onion",
-      "store": "grocery",
+      "store": "whole-foods",
       "aisle": "Produce",
       "name": "Red onion",
       "qty": "1/2",
@@ -802,7 +802,7 @@
     },
     {
       "id": "parsley",
-      "store": "grocery",
+      "store": "whole-foods",
       "aisle": "Produce",
       "name": "Flat-leaf parsley",
       "qty": "1 bunch",
@@ -810,7 +810,7 @@
     },
     {
       "id": "broccoli",
-      "store": "club",
+      "store": "costco",
       "aisle": "Produce",
       "name": "Broccoli florets",
       "qty": "about 1 1/2 lb",
@@ -818,7 +818,7 @@
     },
     {
       "id": "chicken-breasts",
-      "store": "club",
+      "store": "costco",
       "aisle": "Meat & fish",
       "name": "Chicken breasts, boneless and skinless",
       "qty": "2 (about 1 lb)",
@@ -826,7 +826,7 @@
     },
     {
       "id": "panko",
-      "store": "grocery",
+      "store": "whole-foods",
       "aisle": "Pantry",
       "name": "Panko breadcrumbs",
       "qty": "1 cup",
@@ -834,7 +834,7 @@
     },
     {
       "id": "buns",
-      "store": "grocery",
+      "store": "whole-foods",
       "aisle": "Bakery",
       "name": "Brioche buns",
       "qty": "2",
@@ -842,7 +842,7 @@
     },
     {
       "id": "mayo",
-      "store": "grocery",
+      "store": "whole-foods",
       "aisle": "Pantry",
       "name": "Mayonnaise",
       "qty": "1 small jar",
@@ -850,7 +850,7 @@
     },
     {
       "id": "pickles",
-      "store": "grocery",
+      "store": "whole-foods",
       "aisle": "Pantry",
       "name": "Dill pickle slices",
       "qty": "1 jar",
@@ -858,7 +858,7 @@
     },
     {
       "id": "limes",
-      "store": "club",
+      "store": "costco",
       "aisle": "Produce",
       "name": "Limes",
       "qty": "2",
@@ -866,7 +866,7 @@
     },
     {
       "id": "sparkling-wine",
-      "store": "grocery",
+      "store": "whole-foods",
       "aisle": "Wine",
       "name": "Dry sparkling wine",
       "qty": "1 bottle",

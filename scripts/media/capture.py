@@ -1,5 +1,5 @@
-"""Captures desktop-browser screenshots of every feature, terminal screenshots of the data checks,
-a short GIF, and the hero image.
+"""Captures desktop-browser screenshots of every feature (with the feature circled), terminal screenshots
+of the data checks, and a short GIF that walks through every feature.
 
 Usage:  python3 -m http.server 8000   (in one terminal, from the repo root)
         python3 scripts/media/capture.py
@@ -74,6 +74,27 @@ def framed(browser, raw: Image.Image, tab, scale=2):
 
 # ---------- website screenshots ----------
 
+RING_JS = """
+([sels, only_visible]) => {
+  document.querySelectorAll('.mesa-ring').forEach((e) => e.remove());
+  for (const raw of sels) {
+    const [sel, idx] = raw.split('@');
+    let els = [...document.querySelectorAll(sel)];
+    if (idx !== undefined) els = [els[Number(idx)]];
+    for (const el of els) {
+      if (!el) continue;
+      const r = el.getBoundingClientRect();
+      if (only_visible && (r.top < 44 || r.bottom > innerHeight || r.width === 0)) continue;
+      const pad = 6, d = document.createElement('div');
+      d.className = 'mesa-ring';
+      d.style.cssText = `position:absolute;left:${r.left + scrollX - pad}px;top:${r.top + scrollY - pad}px;width:${r.width + 2 * pad}px;height:${r.height + 2 * pad}px;border:3px solid #F2B84B;border-radius:14px;pointer-events:none;z-index:9999;box-shadow:0 0 0 2px rgba(23,18,29,.6)`;
+      document.body.appendChild(d);
+    }
+  }
+}
+"""
+
+
 class Site:
     def __init__(self, browser, height=620, scale=2):
         self.browser, self.scale = browser, scale
@@ -90,80 +111,111 @@ class Site:
         self.page.evaluate(f"document.querySelector({json.dumps(selector)}).scrollIntoView()")
         self.page.evaluate(f"window.scrollBy(0, {offset})"); self.page.wait_for_timeout(200)
 
+    def ring(self, *sels, only_visible=True):
+        """Circles the features being shown. A selector like 'x@0' circles only the first match."""
+        self.page.evaluate(RING_JS, [list(sels), only_visible]); self.page.wait_for_timeout(80)
+
+    def unring(self): self.page.evaluate(RING_JS, [[], False])
+
     def grab(self, name, tab, height=None):
         if height: self.page.set_viewport_size({"width": W, "height": height})
         self.page.wait_for_timeout(120)
         raw = Image.open(io.BytesIO(self.page.screenshot())).convert("RGB")
         framed(self.browser, raw, tab, self.scale).save(SHOTS / f"{name}.png", optimize=True)
-        print("wrote", name)
+        self.unring(); print("wrote", name)
 
     def close(self): self.ctx.close()
 
 
+def costco_items(s): return s.page.locator("#v-shop .store[data-store=costco] .item")
+
+
 def tick_some(s):
-    items = s.page.locator("#v-shop .store[data-store=club] .item")
-    for i in (0, 1, 2, 3): items.nth(i).locator("label.nm").click()
+    for i in (0, 1, 2, 3): costco_items(s).nth(i).locator("label.nm").click()
 
 
 def website_shots(browser):
     s = Site(browser)
-    s.grab("week", "", 700)
+    s.ring(".flow-grid"); s.grab("week", "", 700)
     # history: the earlier sample week
     s.page.click("#weeknav button[data-week='2026-11-09']"); s.page.wait_for_timeout(250)
-    s.page.evaluate("window.scrollTo(0, 0)"); s.grab("weeks", "", 700)
+    s.page.evaluate("window.scrollTo(0, 0)"); s.ring("#weeknav .seg"); s.grab("weeks", "", 700)
     s.page.click("#weeknav button[data-week='2026-11-16']"); s.page.wait_for_timeout(250)
     # "We liked this" on a dish card
     s.scroll_to("#v-week .like", -460)
     s.page.locator("#v-week .like").first.click(); s.page.wait_for_timeout(250)
-    s.grab("like", "", 700)
-    # shop: store split, then ticks and a moved item, then hide ticked
-    s.tab("shop"); s.grab("shop", "shop", 760)
-    s.page.locator("#v-shop .store[data-store=club] .item").nth(3).locator(".seg button[data-s=grocery]").click(); s.page.wait_for_timeout(250)
-    s.scroll_to("#v-shop h3", -115); s.grab("shop-store", "shop", 700)
+    s.ring("#v-week .like@0"); s.grab("like", "", 700)
+    # shop: store split and presets, then a store switch, ticks, hide ticked
+    s.tab("shop"); s.scroll_to("#v-shop h3", -115)
+    s.ring("#v-shop .split", "#v-shop .quick", "#copy"); s.grab("shop", "shop", 700)
+    costco_items(s).nth(3).locator(".seg button[data-s=whole-foods]").click(); s.page.wait_for_timeout(250)
+    s.scroll_to("#v-shop h3", -115)
+    s.ring("#v-shop .split", "#v-shop .note b", "#v-shop .store[data-store=costco] .item .seg@0"); s.grab("shop-store", "shop", 700)
     tick_some(s)
-    s.scroll_to("#lists", -90); s.grab("shop-ticks", "shop", 700)
+    s.scroll_to("#lists", -90); s.ring("#lists input:checked + .box"); s.grab("shop-ticks", "shop", 700)
     s.page.check("#hide-done"); s.page.wait_for_timeout(200)
-    s.scroll_to("#lists", -90); s.grab("shop-hide", "shop", 700)
+    s.scroll_to(".shop-bar", -90); s.ring(".toggle"); s.grab("shop-hide", "shop", 700)
     # cook
-    s.tab("wed"); s.grab("cook", "wed", 760)
-    # faves: before and after the roll
-    s.tab("faves"); s.page.set_viewport_size({"width": W, "height": 800}); s.grab("faves", "faves")
-    s.page.click("#roll"); s.page.wait_for_timeout(250); s.grab("roll", "faves", 800)
+    s.tab("wed"); s.ring(".daypick", "#v-cook .callout@0"); s.grab("cook", "wed", 760)
+    # faves: the rotation, then the roll
+    s.tab("faves"); s.scroll_to(".faves", -120); s.ring(".faves .fav > .chip"); s.grab("faves", "faves", 800)
+    s.page.evaluate("window.scrollTo(0, 0)"); s.page.click("#roll"); s.page.wait_for_timeout(250)
+    s.scroll_to(".rollbox", -100); s.ring(".picks", "#roll"); s.grab("roll", "faves", 800)
     s.close()
     # the demo rules panel in the footer
     s = Site(browser)
     s.page.evaluate("document.querySelector('#rules').open = true")
-    s.scroll_to("#rules", -60); s.grab("rules", "", 700)
+    s.scroll_to("#rules", -60); s.ring("#rules"); s.grab("rules", "", 700)
     s.close()
 
 
 def gif(browser):
+    """One recording that walks through every feature, with each one circled as it is used."""
     s = Site(browser, height=560, scale=1)
     bar = bar_png(browser, W, "", 1)
     frames, durations = [], []
 
-    def snap(ms):
+    def snap(ms, *rings):
+        if rings: s.ring(*rings)
         raw = Image.open(io.BytesIO(s.page.screenshot())).convert("RGB")
         img = Image.new("RGB", (raw.width, raw.height + bar.height)); img.paste(bar, (0, 0)); img.paste(raw, (0, bar.height))
         frames.append(img); durations.append(ms)
 
-    snap(1500)
-    s.page.evaluate("window.scrollTo(0, 520)"); s.page.wait_for_timeout(150); snap(1200)
-    s.tab("shop"); snap(1200)
-    items = s.page.locator("#v-shop .store[data-store=club] .item")
-    s.scroll_to("#lists", -90); snap(800)
-    for i in (0, 1, 2):
-        items.nth(i).locator("label.nm").click(); s.page.wait_for_timeout(120); snap(600)
-    items.nth(4).locator(".seg button[data-s=grocery]").click(); s.page.wait_for_timeout(150); snap(1200)
-    s.page.check("#hide-done"); s.page.wait_for_timeout(150); snap(1400)
-    s.tab("wed"); snap(1500)
-    s.tab("faves"); snap(1000)
-    s.page.click("#roll"); s.page.wait_for_timeout(250); snap(2600)
+    # week grid, then the earlier week and back
+    s.scroll_to(".flow", -90); snap(1700, ".flow-grid")
+    s.page.evaluate("window.scrollTo(0, 0)"); s.page.click("#weeknav button[data-week='2026-11-09']"); s.page.wait_for_timeout(250); snap(1300, "#weeknav .seg")
+    s.page.click("#weeknav button[data-week='2026-11-16']"); s.page.wait_for_timeout(250); snap(900, "#weeknav .seg")
+    # shop: split and presets, a store switch, ticks, hide ticked
+    s.tab("shop"); s.scroll_to("#v-shop h3", -115); snap(1700, "#v-shop .split", "#v-shop .quick", "#copy")
+    s.scroll_to("#lists", -90); snap(1200, "#v-shop .store[data-store=costco] .item .seg@0")
+    costco_items(s).nth(3).locator(".seg button[data-s=whole-foods]").click(); s.page.wait_for_timeout(250)
+    s.scroll_to("#v-shop h3", -115); snap(1700, "#v-shop .split", "#v-shop .note b")
+    s.scroll_to("#lists", -90); snap(700)
+    for i in (0, 1, 2, 3):
+        costco_items(s).nth(i).locator("label.nm").click(); s.page.wait_for_timeout(120); snap(550, "#lists input:checked + .box")
+    snap(900, "#lists input:checked + .box")
+    s.page.check("#hide-done"); s.page.wait_for_timeout(200); s.scroll_to(".shop-bar", -90); snap(1700, ".toggle")
+    # cook: two days
+    s.tab("wed"); snap(1700, ".daypick", "#v-cook .callout@0")
+    s.page.click(".daypick a:nth-child(5)"); s.page.wait_for_timeout(250); s.page.evaluate("window.scrollTo(0, 0)"); snap(1300, ".daypick")
+    # like a dish
+    s.tab("week"); s.scroll_to("#v-week .like", -460); s.page.locator("#v-week .like").first.click(); s.page.wait_for_timeout(250)
+    snap(1700, "#v-week .like@0")
+    # faves: rotation, then the roll
+    s.tab("faves"); s.scroll_to(".faves", -120); snap(1700, ".faves .fav > .chip")
+    s.page.evaluate("window.scrollTo(0, 0)"); s.page.click("#roll"); s.page.wait_for_timeout(250)
+    s.scroll_to(".rollbox", -100); snap(2400, ".picks", "#roll")
+    # the house rules
+    s.page.evaluate("document.querySelector('#rules').open = true"); s.scroll_to("#rules", -60); snap(2200, "#rules")
     s.close()
-    pal = frames[0].quantize(colors=128, method=Image.Quantize.MEDIANCUT)
+    # one shared palette built from several frames, so the circles keep their colour
+    sample = frames[::3]
+    sheet = Image.new("RGB", (frames[0].width, frames[0].height * len(sample)))
+    for i, f in enumerate(sample): sheet.paste(f, (0, i * f.height))
+    pal = sheet.quantize(colors=160, method=Image.Quantize.MEDIANCUT)
     q = [f.quantize(palette=pal, dither=Image.Dither.NONE) for f in frames]
     q[0].save(SHOTS / "demo.gif", save_all=True, append_images=q[1:], duration=durations, loop=0, optimize=True, disposal=2)
-    print("wrote demo.gif")
+    print("wrote demo.gif", len(frames), "frames")
 
 
 # ---------- terminal and code screenshots ----------
@@ -232,30 +284,9 @@ def json_shot(browser):
     print("wrote data-json")
 
 
-# ---------- hero ----------
-
-def compose(browser):
-    css = """
-    body { font-family: Figtree, sans-serif; color:#EBE5F2; }
-    .stage { background: linear-gradient(135deg,#17121D 0%,#2A1F3A 100%); position:relative; overflow:hidden; }
-    .win { position:absolute; border-radius:10px; overflow:hidden; box-shadow:0 22px 44px rgba(0,0,0,.45); }
-    .win img { display:block; width:100%; }
-    h1 { font-family:"Young Serif",serif; font-weight:400; margin:0; }
-    p { margin:0; color:#ABA0B8; }
-    """
-    uri = lambda n: (SHOTS / n).as_uri()
-    hero = f"""<div class=stage style="width:1500px;height:820px">
-      <div style="position:absolute;left:72px;top:52px"><h1 style="font-size:64px">Mesa</h1>
-        <p style="font-size:24px;margin-top:8px">A weekly meal planner: six dinners, one shopping list, packed lunches from leftovers.</p></div>
-      <div class=win style="left:72px;top:210px;width:640px"><img src="{uri('week.png')}"></div>
-      <div class=win style="left:760px;top:250px;width:640px"><img src="{uri('shop-ticks.png')}"></div></div>"""
-    render_html(browser, "<style>" + css + "</style>" + hero, 1500, 820, SHOTS / "hero.png", scale=1, selector=".stage")
-    print("wrote hero.png")
-
-
 if __name__ == "__main__":
     with sync_playwright() as p:
         b = launch(p)
-        website_shots(b); gif(b); terminal_shots(b); json_shot(b); compose(b)
+        website_shots(b); gif(b); terminal_shots(b); json_shot(b)
         b.close()
     for f in sorted(SHOTS.iterdir()): print(f.name, f"{f.stat().st_size/1024:.0f} KB")
