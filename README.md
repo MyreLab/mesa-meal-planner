@@ -6,7 +6,7 @@
 
 A weekly meal planner that gives me six dinners, one shopping list and packed lunches from the leftovers.
 
-*Mesa* is Portuguese for "table". It is a dashboard made with plain HTML, CSS and JavaScript, with all the data stored in JSON files. It works in a desktop browser and on a phone.
+*Mesa* is Portuguese for "table". It is a dashboard made with plain HTML, CSS and JavaScript, with all the data stored in JSON files. Each week's plan is checked by a script before it is published. It works in the browser and on a phone.
 
 **Try the [Live demo](https://myrelab.github.io/mesa-meal-planner/)**
 
@@ -48,7 +48,7 @@ Mesa has four tabs: Week, Shop, Cook and Faves. Here is every feature.
 
 ## The data side
 
-How a week gets planned: Claude Code runs the planning step on a schedule. Mesa is the front end that reads its output.
+How a week gets planned: Claude Code writes the plan from a written set of rules ([`docs/PLAYBOOK.md`](docs/PLAYBOOK.md)), on a schedule that runs outside this repo. This repo checks the output and serves it. Mesa is the front end that reads it.
 
 ![Pipeline: a weekly plan is written, checked, published and read by the site](docs/diagrams/pipeline.png)
 
@@ -56,11 +56,16 @@ How a week gets planned: Claude Code runs the planning step on a schedule. Mesa 
 
   <img src="docs/screenshots/data-json.png" alt="A day from a week file" width="420">
 
-- **Each week is checked before it is published.** [`scripts/validate-data.mjs`](scripts/validate-data.mjs) catches mistakes such as an ingredient that is not on the shopping list, a weeknight dinner that takes too long, or too many premium proteins in a week. Run it with `npm run validate`. Here it is on a week I broke on purpose:
+- **Each week is checked in three layers before it is published.** [`scripts/validate-data.mjs`](scripts/validate-data.mjs) runs them in order:
+  1. **Shape.** Every file is checked against a JSON Schema in `schemas/`, so a missing field or a wrong type is caught first.
+  2. **References.** Every ingredient has to exist on the shopping list.
+  3. **House rules.** The rules in `data/config.json` are enforced, such as a weeknight dinner that takes too long or too many premium proteins in a week.
+
+  Run it with `npm run validate`. Here it is on a week I broke on purpose:
 
   <img src="docs/screenshots/checks-fail.png" alt="The data check reporting four problems" width="640">
 
-- **The weekly plan is written by Claude Code** from a written set of rules ([`docs/PLAYBOOK.md`](docs/PLAYBOOK.md)). I do not take the output on trust, which is why the check script exists.
+- **I do not take the output on trust.** The plan is written by Claude Code, which is why the check script exists. The same checks and the tests run in CI on every pull request and every push to main, so a bad week shows up as a failing badge.
 - **The favourites roll is a small function** ([`js/randomizer.js`](js/randomizer.js)) with rules: a dish has to rest for 28 days before it can come back, and a roll gives at most two picks. It has tests, including one that runs thousands of random rolls to check that no rule is ever broken:
 
   <img src="docs/screenshots/checks-pass.png" alt="The data check and the tests passing" width="640">
